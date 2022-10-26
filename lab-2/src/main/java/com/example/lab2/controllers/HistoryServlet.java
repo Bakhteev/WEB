@@ -8,15 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("")
-public class ControllerServlet extends HttpServlet {
+@WebServlet("/history")
+public class HistoryServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        req.getServletContext().setAttribute("leadTime", System.nanoTime());
-        if (req.getQueryString() != null) {
-            getServletContext().getRequestDispatcher("/hit").forward(req, res);
-        } else
-            getServletContext().getRequestDispatcher("/index.jsp").forward(req, res);
-
+        getServletContext().getRequestDispatcher("/table.jsp").forward(req, res);
     }
 }

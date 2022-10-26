@@ -1,5 +1,6 @@
 .form {
   max-width: 457px;
+
   &__title {
     margin-right: 20px;
     white-space: nowrap;
@@ -20,6 +21,7 @@
     cursor: pointer;
     outline: none;
     transition: 0.3s all;
+
     &.wrong {
       animation: wrong-animation 0.5s;
       background: rgb(206, 21, 21);
@@ -33,7 +35,9 @@
       // color: teal;
       // border-color: teal;
     }
+
     backface-visibility: hidden;
+
     &:active {
       padding: 11px 39px;
       box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
@@ -44,30 +48,28 @@
 .X-panel {
   &__label {
     margin-right: 10px;
-    input {
-      border: 1px solid transparent;
-      padding: 5px 10px;
-      font-size: 15px;
-      background-color: $bg-color;
-      color: #fff;
-      border-radius: 5px;
-      box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
-      cursor: pointer;
-      outline: none;
-      transition: 0.3s all;
-      box-sizing: border-box;
+    position: relative;
+
+    .square {
+      left: 0;
+      top: 2px;
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border: 2px solid $bg-color;
+      transition: 0.3s;
+      border-radius: 3px;
+    }
+
+    input[type="checkbox"] {
+      opacity: 0;
+
       &:last-child {
         margin-right: 0;
       }
-      &:hover,
-      &.active {
-        background: transparent;
-        color: teal;
-        border-color: teal;
-      }
-      &:active,
-      &.active {
-        box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.4);
+
+      &:checked ~ .square {
+        background: $bg-color;
       }
     }
   }
@@ -82,6 +84,7 @@
     // margin-right: 10px;
     position: relative;
     margin-right: 10px;
+
     .circle {
       left: 4px;
       top: 4px;
@@ -92,8 +95,10 @@
       border: 2px solid $bg-color;
       transition: 0.3s;
     }
+
     input {
       opacity: 0;
+
       &:checked ~ .circle {
         background: $bg-color;
       }
@@ -128,3 +133,20 @@
     transform: translateX(-20px);
   }
 }
+
+.R-select {
+  background-color: $bg-color;
+  border-radius: 3px;
+  color: white;
+  padding: 5px;
+  border: none;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  outline: none;
+
+  option {
+    padding: 30px;
+  }
+}
+
+
+

@@ -13,7 +13,7 @@ public class XuiServlet extends HttpServlet {
 //        Point[] arr = {point, point2, point2, point2, point2, point2, point2};
 //        request.setAttribute("points", arr);
 //        try {
-//            getServletConfig().getServletContext().getRequestDispatcher("/xui.jsp").forward(request, response);
+//            getServletConfig().getServletContext().getRequestDispatcher("/error.jsp").forward(request, response);
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }

@@ -1,31 +1,42 @@
+<%@ page import="com.example.lab2.models.Point" %>
+<%@ page import="java.util.Arrays" %>
+<%@ page import="com.example.lab2.state.StateBean" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="state" class="com.example.lab2.state.StateBean" scope="application"/>
-<!DOCTYPE html>
-<html lang="en">
+
+<%
+    Point pointToAdd = (Point) request.getAttribute("point");
+    if (pointToAdd != null) {
+        state.add(session.getId(), pointToAdd);
+    }
+%>
+<html>
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="https://unpkg.com/flexboxgrid2@7.2.1/flexboxgrid2.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css">
-    <title>Vite + TS</title>
+    <title>Table</title>
 </head>
 <body>
-<header class="header">
-    <div class="container">
-        <div class="header__inner row center-xs">
-            <p class="header__text">Bakhteev Bogdan</p>
-            <p class="header__text">Group: P32302</p>
-            <p class="header__text">Variant: 59216</p>
-        </div>
-    </div>
-</header>
-<div class="main">
-    <div class="container">
-        <div class="row between-xs">
+<div style="display:flex;">
+    <a href="/"
+       style="font-size: 20px;
+       color: #ffffff;
+       background: teal;
+       padding: 10px;
+       border-radius: 10px;
+       margin: 10px;
+       text-decoration: none;">
+        To the main page
+    </a>
+</div>
+<div style="max-width: 1150px; margin: 0 auto;">
+    <div class="row between-xs">
+        <div class="col-lg-6 col-md-12" style="margin-bottom: 30px;">
             <div class="main__graph">
                 <svg
-                        style="border: 1px solid #000; box-sizing: border-box"
+                        style="border: 1px solid #000; box-sizing: border-box; width: 400px; height: 400px"
                         id="graph"
-                        viewBox="0 0 300 300"
+                        viewBox="-50 -50 400 400"
                         xmlns="http://www.w3.org/2000/svg"
                 >
                     <!-- circle -->
@@ -35,7 +46,7 @@
                     />
 
                     <!-- triangle -->
-                    <polygon class="graph-shape" points="150,200 150,150 200,150"/>
+                    <polygon class="graph-shape" points="150,250 150,150 100,150"/>
 
                     <!-- rectangle -->
                     <polygon
@@ -309,141 +320,61 @@
                             stroke-dasharray="3,3"
                             id="y-line"
                     />
-                    <circle cx="-30" cy="-30" r="2" class="dot dot-active"/>
+                    <%
+                        if (state.contains(session.getId())) {
+                            for (Point dot : state.getList(session.getId())) {
+                                double convX = (dot.getX() / dot.getR()) * 100 + 150;
+                                double convY = -((dot.getY() / dot.getR()) * 100) + 150;
+                    %>
+                    <circle cx="<%=convX%>" cy="<%=convY%>" r="2" class="dot dot-active"/>
+                    <%
+                            }
+                        }
+                    %>
                     <!-- ====================================================================================== -->
                 </svg>
             </div>
-            <form class="form" id="form" style="margin-top: 30px" method="GET" action="/">
-                <div class="X-panel flex">
-                    <h4 class="form__title">X value:</h4>
-                    <label class="X-panel__label flex">
-                        <input type="checkbox" value="-5" class="x-btn" name="x"/>
-                        <span>-5</span>
-                        <div class="square"></div>
-                    </label>
-                    <label class="X-panel__label flex">
-                        <input
-                                type="checkbox"
-                                value="-4"
-                                class="x-btn" name="x"
-                        />
-                        <span>-4</span>
-                        <div class="square"></div>
-                    </label>
-                    <label class="X-panel__label flex">
-                        <input type="checkbox" value="-3" class="x-btn" name="x"/>
-                        <span>-3</span>
-                        <div class="square"></div>
-                    </label>
-                    <label class="X-panel__label flex">
-                        <input type="checkbox" value="-2" class="x-btn" name="x"/>
-                        <span>-2</span>
-                        <div class="square"></div>
-                    </label>
-                    <label class="X-panel__label flex">
-                        <input type="checkbox" value="-1" class="x-btn" name="x"/>
-                        <span>-1</span>
-                        <div class="square"></div>
-                    </label>
-                    <label class="X-panel__label flex">
-                        <input type="checkbox" value="0" class="x-btn X-panel__label" name="x"/>
-                        <span>0</span>
-                        <div class="square"></div>
-                    </label>
-                    <label class="X-panel__label flex">
-                        <input type="checkbox" value="1" class="x-btn" name="x"/>
-                        <span>3</span>
-                        <div class="square"></div>
-                    </label>
-                    <label class="X-panel__label flex">
-                        <input type="checkbox" value="2" class="x-btn" name="x"/>
-                        <span>2</span>
-                        <div class="square"></div>
-                    </label>
-                    <label class="X-panel__label flex">
-                        <input type="checkbox" value="3" class="x-btn" name="x"/>
-                        <span>3</span>
-                        <div class="square"></div>
-                    </label>
-                </div>
-                <div class="Y-panel">
-                    <label class="flex">
-                        <h4 class="form__title">Y value:</h4>
-                        <input
-                                type="text"
-                                name="y"
-                                placeholder="In range (-3:3)"
-                                id="y-input"
-                        />
-                    </label>
-                </div>
-                <div class="R-panel flex">
-                    <h4 class="form__title">R value:</h4>
-                    <label class="R-select-wrapper">
-                        <select name="r" id="r" class="R-select">
-                            <option disabled selected>choose r value</option>
-                            <option value="1">1</option>
-                            <option value="1.5">1.5</option>
-                            <option value="2">2</option>
-                            <option value="2.5">2.5</option>
-                            <option value="3">3</option>
-                        </select>
-                    </label>
-                    <%--                        <label for="r1" class="R-panel__label">--%>
-                    <%--                            <input type="radio" value="1" class="r-radio" id="r1"/>--%>
-                    <%--                            <span>1</span>--%>
-                    <%--                            <span class="circle"></span>--%>
-                    <%--                        </label>--%>
-                    <%--                        <label for="r2" class="R-panel__label">--%>
-                    <%--                            <input type="radio" value="1.5" class="r-radio" id="r2"/>--%>
-                    <%--                            <span>1.5</span>--%>
-                    <%--                            <span class="circle"></span>--%>
-                    <%--                        </label>--%>
-                    <%--                        <label for="r3" class="R-panel__label">--%>
-                    <%--                            <input type="radio" value="2" class="r-radio" id="r3"/>--%>
-                    <%--                            <span>2</span>--%>
-                    <%--                            <span class="circle"></span>--%>
-                    <%--                        </label>--%>
-                    <%--                        <label for="r4" class="R-panel__label">--%>
-                    <%--                            <input type="radio" value="2.5" class="r-radio" id="r4"/>--%>
-                    <%--                            <span>2.5</span>--%>
-                    <%--                            <span class="circle"></span>--%>
-                    <%--                        </label>--%>
-                    <%--                        <label for="r5" class="R-panel__label">--%>
-                    <%--                            <input type="radio" value="3" class="r-radio" id="r5"/>--%>
-                    <%--                            <span>3</span>--%>
-                    <%--                            <span class="circle"></span>--%>
-                    <%--                        </label>--%>
-                </div>
-                <div class="form__btns">
-                    <button id="submit" type="submit">Submit</button>
-                    <%--                        <button type="submit" style="opacity: 0" id="send"></button>--%>
-                </div>
-            </form>
         </div>
-        <%--            <div class="col-lg-6 col-md-12">--%>
-        <%--                <div class="history">--%>
-        <%--                    <table>--%>
-        <%--                        <thead>--%>
-        <%--                        <tr>--%>
-        <%--                            <th>X value</th>--%>
-        <%--                            <th>Y value</th>--%>
-        <%--                            <th>R value</th>--%>
-        <%--                            <th>Area hit</th>--%>
-        <%--                            <th>Current time</th>--%>
-        <%--                            <th>Execution time</th>--%>
-        <%--                        </tr>--%>
-        <%--                        </thead>--%>
-        <%--                        <tbody id="result-table-body"></tbody>--%>
-        <%--                    </table>--%>
-        <%--                </div>--%>
-        <%--            </div>--%>
+        <div class="col-lg-6 col-md-12">
+            <div class="history">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>X value</th>
+                        <th>Y value</th>
+                        <th>R value</th>
+                        <th>Area hit</th>
+                        <th>Current time</th>
+                        <th>Execution time</th>
+                    </tr>
+                    </thead>
+                    <tbody id="result-table-body">
+                    <%
+                        if (state.contains(session.getId())) {
+                            for (Point point : state.getList(session.getId())) {
+                    %>
+                    <tr style='text-align: center;'>
+                        <td><%= point.getX()%>
+                        </td>
+                        <td><%= point.getY()%>
+                        </td>
+                        <td><%= point.getR()%>
+                        </td>
+                        <td><%= point.isHitted()%>
+                        </td>
+                        <td><%= point.getCurrentTime()%>
+                        </td>
+                        <td><%= point.getExecutionTime()%> ms</td>
+                    </tr>
+                    <%
+                            }
+                        }
+                    %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
-<div class="popup disabled">
-    <span class="popup__close">&times;</span>
-    <h2 class="popup__title"></h2>
-</div>
-<script type="module" src="./js/index.js"></script>
 </body>
 </html>

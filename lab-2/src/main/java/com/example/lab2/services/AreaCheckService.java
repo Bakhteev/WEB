@@ -20,15 +20,15 @@ public class AreaCheckService {
             throw new InvalidParameterException("Y must be from -3 to 3");
         }
         if (!rValues.contains(r)) {
-            throw new InvalidParameterException("R must be from -3 to 3");
+            throw new InvalidParameterException("Wrong R");
         }
     }
 
     public Boolean checkHit(int x, float y, float r) {
         if (x >= 0 && y >= 0 && x <= r && y <= r) {
             return true;
-        } else if (x >= 0 && y <= 0) {
-            if (-y <= (r / 2 - x)) {
+        } else if (x <= 0 && y <= 0) {
+            if (y >= -2 * x - r) {
                 return true;
             }
             return false;
