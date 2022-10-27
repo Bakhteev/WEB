@@ -35,7 +35,7 @@
                     />
 
                     <!-- triangle -->
-                    <polygon class="graph-shape" points="150,200 150,150 200,150"/>
+                    <polygon class="graph-shape" points="150,250 150,150 100,150"/>
 
                     <!-- rectangle -->
                     <polygon
@@ -389,55 +389,12 @@
                             <option value="3">3</option>
                         </select>
                     </label>
-                    <%--                        <label for="r1" class="R-panel__label">--%>
-                    <%--                            <input type="radio" value="1" class="r-radio" id="r1"/>--%>
-                    <%--                            <span>1</span>--%>
-                    <%--                            <span class="circle"></span>--%>
-                    <%--                        </label>--%>
-                    <%--                        <label for="r2" class="R-panel__label">--%>
-                    <%--                            <input type="radio" value="1.5" class="r-radio" id="r2"/>--%>
-                    <%--                            <span>1.5</span>--%>
-                    <%--                            <span class="circle"></span>--%>
-                    <%--                        </label>--%>
-                    <%--                        <label for="r3" class="R-panel__label">--%>
-                    <%--                            <input type="radio" value="2" class="r-radio" id="r3"/>--%>
-                    <%--                            <span>2</span>--%>
-                    <%--                            <span class="circle"></span>--%>
-                    <%--                        </label>--%>
-                    <%--                        <label for="r4" class="R-panel__label">--%>
-                    <%--                            <input type="radio" value="2.5" class="r-radio" id="r4"/>--%>
-                    <%--                            <span>2.5</span>--%>
-                    <%--                            <span class="circle"></span>--%>
-                    <%--                        </label>--%>
-                    <%--                        <label for="r5" class="R-panel__label">--%>
-                    <%--                            <input type="radio" value="3" class="r-radio" id="r5"/>--%>
-                    <%--                            <span>3</span>--%>
-                    <%--                            <span class="circle"></span>--%>
-                    <%--                        </label>--%>
                 </div>
                 <div class="form__btns">
                     <button id="submit" type="submit">Submit</button>
-                    <%--                        <button type="submit" style="opacity: 0" id="send"></button>--%>
                 </div>
             </form>
         </div>
-        <%--            <div class="col-lg-6 col-md-12">--%>
-        <%--                <div class="history">--%>
-        <%--                    <table>--%>
-        <%--                        <thead>--%>
-        <%--                        <tr>--%>
-        <%--                            <th>X value</th>--%>
-        <%--                            <th>Y value</th>--%>
-        <%--                            <th>R value</th>--%>
-        <%--                            <th>Area hit</th>--%>
-        <%--                            <th>Current time</th>--%>
-        <%--                            <th>Execution time</th>--%>
-        <%--                        </tr>--%>
-        <%--                        </thead>--%>
-        <%--                        <tbody id="result-table-body"></tbody>--%>
-        <%--                    </table>--%>
-        <%--                </div>--%>
-        <%--            </div>--%>
     </div>
 </div>
 <div class="popup disabled">
