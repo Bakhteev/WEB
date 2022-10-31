@@ -1,0 +1,25 @@
+.label {
+  position: relative;
+  span {
+    background: #ffffff;
+    position: absolute;
+    z-index: 1;
+    top: 60%;
+    left: 20px;
+    transform: translateY(-50%);
+    transition: 0.3s;
+  }
+  input {
+    border: 1px solid black;
+    width: 100%;
+    &:focus,
+    &.active {
+      border-color: #2d9bef;
+      + span {
+        top: 35%;
+        font-size: 11px;
+        color: #898b91;
+      }
+    }
+  }
+}
