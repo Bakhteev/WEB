@@ -11,7 +11,7 @@ import {CENTER_OF_GRAPH, GRAPH_SIZE, DEFAULT_SEGMENT} from './const.js'
 
 import {wrongAnimation} from './animations.js'
 import {showPopUp} from './popup.js'
-// import { fetchData } from './api.js'
+import { fetchData } from './api.js'
 
 const graph = document.querySelector('#graph')
 const yInput = document.querySelector('#y-input')
@@ -30,8 +30,12 @@ let segment
 
 // document.addEventListener('DOMContentLoaded', () => {
 //   ;(async () => {
+//     //   const token = document.cookie.split(";")
+//     //   .filter(i => i.trim().startsWith('token'))
+//     //       [0].split("=")[1]
+//     //     console.log(token)
 //     const data = await fetchData('/history')
-//
+
 //     console.log(data)
 //     document
 //       .querySelector('#result-table-body')
@@ -160,61 +164,61 @@ function changeRValueLabels(rValue) {
 
 const form = document.querySelector('#form')
 const submitBtn = document.querySelector('#submit')
-submitBtn.addEventListener('click', (e) => {
-    // e.preventDefault()
-    if (yInput.value === '') {
-        showPopUp(true, 'Y value cannot be empty')
-        wrongAnimation()
-        return
-    }
-    if (!+yInput.value) {
-        showPopUp(true, 'Y value must be a number')
-        wrongAnimation()
-        return
-    }
-    if (+yInput.value > 3 || +yInput.value < -3) {
-        showPopUp(true, 'Wrong Y value, out of range (-3 : 3)')
-        wrongAnimation()
-        return
-    }
-    const coordY = convertYToGraphCoord(+yInput.value, rValue)
-    let x
+form.addEventListener('submit', (e) => {
+  e.preventDefault()
+  if (yInput.value === '') {
+    showPopUp(true, 'Y value cannot be empty')
+    wrongAnimation()
+    return
+  }
+  if (!+yInput.value) {
+    showPopUp(true, 'Y value must be a number')
+    wrongAnimation()
+    return
+  }
+  if (+yInput.value > 3 || +yInput.value < -3) {
+    showPopUp(true, 'Wrong Y value, out of range (-3 : 3)')
+    wrongAnimation()
+    return
+  }
+  const coordY = convertYToGraphCoord(+yInput.value, rValue)
+  let x
 
-    xBtns.forEach((btn) => {
-        if (btn.checked) {
-            x = +btn.value
-        }
-    })
-
-    if (x === undefined) {
-        showPopUp(true, 'X value cannot be empty')
-        wrongAnimation()
-        return
+  xBtns.forEach((btn) => {
+    if (btn.checked) {
+      x = +btn.value
     }
+  })
 
-    if (rValue === 0) {
-        showPopUp(true, 'R value is required')
-        wrongAnimation()
-        return
+  if (x === undefined) {
+    showPopUp(true, 'X value cannot be empty')
+    wrongAnimation()
+    return
+  }
+
+  if (rValue === 0) {
+    showPopUp(true, 'R value is required')
+    wrongAnimation()
+    return
+  }
+
+  let coordX = convertXToGraphCoord(x, rValue)
+  setDot(coordX, coordY)
+
+  // setTimeout(() => {
+  //     document.querySelector("#send").click()
+  // }, 1000)
+  ;(async () => {
+    try {
+      const res = await fetchData(`/?x=${x}&y=${yInput.value}&r=${rValue}`)
+      console.log(res)
+      document
+        .querySelector('#result-table-body')
+        .insertAdjacentHTML('afterbegin', tableCreator(res))
+    } catch (error) {
+      alert(error)
     }
-
-    let coordX = convertXToGraphCoord(x, rValue)
-    setDot(coordX, coordY)
-
-    // setTimeout(() => {
-    //     document.querySelector("#send").click()
-    // }, 1000)
-    // ;(async () => {
-    //   try {
-    //     const res = await fetchData(`/hit?x=${x}&y=${yInput.value}&r=${rValue}`)
-    //     console.log(res)
-    //     document
-    //       .querySelector('#result-table-body')
-    //       .insertAdjacentHTML('afterbegin', tableCreator(res))
-    //   } catch (error) {
-    //     alert(error)
-    //   }
-    // })()
+  })()
 })
 
 const countEvenLineCoord = (shift) => CENTER_OF_GRAPH - segment * shift

@@ -12,17 +12,17 @@ public class StateBean implements Serializable {
     private static final long serialVersionUID = 6371964782683150733L;
     LinkedHashMap<String, LinkedList<Point>> map = new LinkedHashMap<>();
 
-    public void add(String sessionId, Point point) {
-        if (map.containsKey(sessionId)) {
-            map.get(sessionId).add(point);
+    public void add(String userId, Point point) {
+        if (map.containsKey(userId)) {
+            map.get(userId).add(point);
         } else {
-            map.put(sessionId, new LinkedList<>());
-            map.get(sessionId).add(point);
+            map.put(userId, new LinkedList<>());
+            map.get(userId).add(point);
         }
     }
 
-    public LinkedList<Point> getList(String sessionId) {
-        return map.get(sessionId);
+    public LinkedList<Point> getList(String userId) {
+        return map.get(userId);
     }
 
     public void setMap(LinkedHashMap<String, LinkedList<Point>> map) {
@@ -33,7 +33,7 @@ public class StateBean implements Serializable {
         return map;
     }
 
-    public boolean contains(String sessionId){
-        return map.containsKey(sessionId);
+    public boolean contains(String userId){
+        return map.containsKey(userId);
     }
 }

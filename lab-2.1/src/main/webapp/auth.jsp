@@ -7,15 +7,16 @@ contentType="text/html;charset=UTF-8" language="java" %>
     <link rel="stylesheet" href="./css/auth.css" />
   </head>
   <body>
-    <div class="row center-xs middle-xs auth container">
+    <div class="row center-xs middle-xs auth my-container">
       <div class="col-xs-6 auth__wrapper">
         <h1 class="auth__title">${title}</h1>
-        <form action="POST" class="auth__form form" to="${formTo}">
+        <form method="POST" class="auth__form form" action="${formTo}">
           <div class="row form__wrapper">
             <label class="form__label label col-xs-12 ">
               <input
                 type="text"
                 class="form__input input"
+                name="email"
               />
               <span class="form__placeholder">email</span>
             </label>
@@ -23,6 +24,7 @@ contentType="text/html;charset=UTF-8" language="java" %>
               <input
                 type="password"
                 class="form__input input"
+                name="password"
               />
               <span class="form__placeholder">password</span>
             </label>
