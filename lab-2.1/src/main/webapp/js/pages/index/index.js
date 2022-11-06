@@ -6,6 +6,7 @@ import {
     convertYToGraphCoord,
     convertXToGraphCoord,
     tableCreator,
+    createRow
 } from './utils.js'
 import {CENTER_OF_GRAPH, GRAPH_SIZE, DEFAULT_SEGMENT} from './const.js'
 
@@ -28,20 +29,16 @@ const popUpCloseBtn = document.querySelector('.popup__close')
 let rValue = 0
 let segment
 
-// document.addEventListener('DOMContentLoaded', () => {
-//   ;(async () => {
-//     //   const token = document.cookie.split(";")
-//     //   .filter(i => i.trim().startsWith('token'))
-//     //       [0].split("=")[1]
-//     //     console.log(token)
-//     const data = await fetchData('/history')
+document.addEventListener('DOMContentLoaded', () => {
+  ;(async () => {
+    const data = await fetchData('/history')
 
-//     console.log(data)
-//     document
-//       .querySelector('#result-table-body')
-//       .insertAdjacentHTML('beforeend', tableCreator(data))
-//   })()
-// })
+    console.log(data)
+    data.length !== 0 && document
+      .querySelector('#result-table-body')
+      .insertAdjacentHTML('beforeend', tableCreator(data))
+  })()
+})
 rSelect.addEventListener('change', (e) => {
     console.log(e.target)
     // rButtons.forEach((int) => {
@@ -214,7 +211,7 @@ form.addEventListener('submit', (e) => {
       console.log(res)
       document
         .querySelector('#result-table-body')
-        .insertAdjacentHTML('afterbegin', tableCreator(res))
+        .insertAdjacentHTML('afterbegin', createRow(res))
     } catch (error) {
       alert(error)
     }

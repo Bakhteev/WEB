@@ -17,20 +17,20 @@ export const convertXToGraphCoord = (xValue, rValue) =>
 export const tableCreator = (data) => {
   let htmlTable = ''
   data.reverse().forEach((obj) => {
-    htmlTable += createTable(obj)
+    htmlTable += createRow(obj)
   })
 
   return htmlTable
 }
 
-const createTable = ({ x, y, r, current_time, execution_time, hitted }) =>
+export const createRow = ({ x, y, r, currentTime, executionTime, hitted }) =>
   `
       <tr style='text-align: center;'>
         <td>${x}</td>
         <td>${y}</td>
         <td>${r}</td>
         <td>${hitted}</td>
-        <td>${current_time}</td>
-        <td>${execution_time} ms</td>
+        <td>${currentTime}</td>
+        <td>${executionTime} ms</td>
       </tr>
     `

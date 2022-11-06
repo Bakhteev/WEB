@@ -1,9 +1,9 @@
 <%@ page import="com.example.lab2.models.Point" %>
-<jsp:useBean
-        id="state"
-        class="com.example.lab2.state.StateBean"
-        scope="application"
-/>
+<%--<jsp:useBean--%>
+<%--        id="state"--%>
+<%--        class="com.example.lab2.state.StateBean"--%>
+<%--        scope="application"--%>
+<%--/>--%>
 <!DOCTYPE html>
 <html lang="en">
 <head>

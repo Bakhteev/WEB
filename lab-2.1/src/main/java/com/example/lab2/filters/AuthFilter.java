@@ -29,6 +29,7 @@ public class AuthFilter extends HttpFilter {
             getServletContext().setAttribute("userState", userState);
         }
         jwtService = new JWTService(userState);
+        getServletContext().setAttribute("jwtService", jwtService);
     }
 
     @Override
@@ -45,16 +46,24 @@ public class AuthFilter extends HttpFilter {
                 token = cookie.getValue();
             }
         }
+
         if (token.length() == 0) {
-            res.sendRedirect(req.getContextPath() + "/login");
-            getServletContext().getRequestDispatcher("/login").forward(req,res);
+            res.sendRedirect("/login");
+            getServletContext().getRequestDispatcher("/login").forward(req, res);
             return;
         }
-        if (jwtService.authenticate(token)) {
-            chain.doFilter(req, res);
-            return;
+        try {
+            if (jwtService.authenticate(token)) {
+                chain.doFilter(req, res);
+                return;
+//                res.sendRedirect(req.getRequestURI());
+//                getServletContext().getRequestDispatcher(req.getRequestURI()).forward(req, res);
+            }
+        } catch (ExpiredJwtException e) {
+            res.sendRedirect("/login");
+            getServletContext().getRequestDispatcher("/login").forward(req, res);
         }
-        res.sendRedirect(req.getContextPath() + "/login");
-        getServletContext().getRequestDispatcher("/login").forward(req,res);
+        res.sendRedirect("/login");
+        getServletContext().getRequestDispatcher("/login").forward(req, res);
     }
 }

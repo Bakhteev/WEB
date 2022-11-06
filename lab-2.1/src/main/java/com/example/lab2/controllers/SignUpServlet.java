@@ -3,6 +3,7 @@ package com.example.lab2.controllers;
 import com.example.lab2.models.User;
 import com.example.lab2.services.AuthService;
 import com.example.lab2.services.JWTService;
+import com.example.lab2.state.HitState;
 import com.example.lab2.state.UserState;
 import com.example.lab2.utils.PasswordHash;
 import jakarta.servlet.ServletException;
@@ -20,15 +21,23 @@ public class SignUpServlet extends HttpServlet {
     AuthService authService;
     UserState userState;
     JWTService jwtService;
+    HitState hitState;
+
     @Override
     public void init() throws ServletException {
         userState = (UserState) getServletContext().getAttribute("userState");
-        if(userState == null){
+        hitState = (HitState) getServletContext().getAttribute("hitState");
+        if (userState == null) {
             userState = new UserState();
             getServletContext().setAttribute("userState", userState);
         }
+        if (hitState == null) {
+            hitState = new HitState();
+            getServletContext().setAttribute("hitState", hitState);
+        }
         authService = new AuthService();
         jwtService = new JWTService(userState);
+        getServletContext().setAttribute("jwtService", jwtService);
     }
 
     @Override
@@ -50,11 +59,19 @@ public class SignUpServlet extends HttpServlet {
             res.getWriter().write("fuck u");
             return;
         }
-//        if(){}
+        if(userState.getUserByEmail(email) != null){
+            res.setStatus(400);
+            res.getWriter().write("This email has already registered");
+            return;
+        }
         User user = new User(email, PasswordHash.generateHashedPassword(password));
         userState.addUser(user);
+        hitState.createUsersList(user.getId());
+
         res.addCookie(new Cookie("token", jwtService.createJwtToken(user)));
+
         getServletContext().setAttribute("userState", userState);
+        getServletContext().setAttribute("hitState", hitState);
         res.sendRedirect("/");
 //        res.setHeader("Authorization", "Bearer " + jwtService.createJwtToken(user));
 //        getServletContext().getRequestDispatcher("/index.jsp").forward(req,res);

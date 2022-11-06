@@ -7,12 +7,12 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 
-public class StateBean implements Serializable {
+public class HitState implements Serializable {
 
     private static final long serialVersionUID = 6371964782683150733L;
-    LinkedHashMap<String, LinkedList<Point>> map = new LinkedHashMap<>();
+    LinkedHashMap<Integer, LinkedList<Point>> map = new LinkedHashMap<>();
 
-    public void add(String userId, Point point) {
+    public void add(int userId, Point point) {
         if (map.containsKey(userId)) {
             map.get(userId).add(point);
         } else {
@@ -21,19 +21,22 @@ public class StateBean implements Serializable {
         }
     }
 
-    public LinkedList<Point> getList(String userId) {
+    public LinkedList<Point> getList(int userId) {
         return map.get(userId);
     }
 
-    public void setMap(LinkedHashMap<String, LinkedList<Point>> map) {
+    public void createUsersList(int userId){
+        map.put(userId, new LinkedList<>());
+    }
+    public void setMap(LinkedHashMap<Integer, LinkedList<Point>> map) {
         this.map = map;
     }
 
-    public LinkedHashMap<String, LinkedList<Point>> getMap() {
+    public LinkedHashMap<Integer, LinkedList<Point>> getMap() {
         return map;
     }
 
-    public boolean contains(String userId){
+    public boolean contains(int userId){
         return map.containsKey(userId);
     }
 }

@@ -28,12 +28,24 @@ public class JWTService {
                 .build()
                 .parseClaimsJws(token);
         String email = (String) jwsClaims.getBody().get("email");
+        System.out.println(userState.getUserByEmail(email));
         return userState.getUserByEmail(email) != null;
+    }
+
+    public User getUserFromToken(String token) {
+        Jws<Claims> jwsClaims = Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token);
+        String email = (String) jwsClaims.getBody().get("email");
+        System.out.println(userState.getUserByEmail(email));
+        return userState.getUserByEmail(email);
     }
 
     public String createJwtToken(User user) {
         return Jwts.builder()
                 .claim("email", user.getEmail())
+                .claim("userId", user.getId())
                 .signWith(key)
                 .setExpiration(new Date(new Date().getTime() + (1000 * 60 * 24)))
                 .compact();

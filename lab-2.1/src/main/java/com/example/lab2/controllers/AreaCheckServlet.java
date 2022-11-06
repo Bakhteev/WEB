@@ -2,7 +2,11 @@ package com.example.lab2.controllers;
 
 import com.example.lab2.models.Point;
 import com.example.lab2.services.AreaCheckService;
-import com.example.lab2.state.StateBean;
+//import com.example.lab2.state.StateBean;
+import com.example.lab2.services.JWTService;
+import com.example.lab2.state.HitState;
+import com.example.lab2.utils.CookieParser;
+import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,17 +17,23 @@ import java.io.IOException;
 import java.security.InvalidParameterException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.Objects;
 
 @WebServlet(name = "hit", value = "/hit")
 public class AreaCheckServlet extends HttpServlet {
 
     AreaCheckService areaCheckService;
-    StateBean stateBean;
+    Gson gson;
+    HitState hitState;
+    JWTService jwtService;
 
     @Override
     public void init() {
-        stateBean = new StateBean();
+        hitState = (HitState) getServletContext().getAttribute("hitState");
         areaCheckService = new AreaCheckService();
+        gson = new Gson();
+        jwtService = (JWTService) getServletContext().getAttribute("jwtService");
     }
 
     @Override
@@ -54,7 +64,7 @@ public class AreaCheckServlet extends HttpServlet {
             String date = simpleDateFormat.format(new Date());
 
             long startTime = (long) getServletContext().getAttribute("leadTime");
-            float executionTime = (float) (System.nanoTime() - startTime)/1_000_000;
+            float executionTime = (float) (System.nanoTime() - startTime) / 1_000_000;
 
             point = new Point(x, y, r, hitted, date, executionTime);
         } catch (InvalidParameterException e) {
@@ -64,7 +74,10 @@ public class AreaCheckServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/error.jsp").forward(req, res);
             return;
         }
-        req.setAttribute("point", point);
-        getServletContext().getRequestDispatcher("/table.jsp").forward(req, res);
+        String token = Objects.requireNonNull(CookieParser.getCookie(req, "token")).getValue();
+        int userId = jwtService.getUserFromToken(token).getId();
+        hitState.add(userId, point);
+        res.getWriter().write(gson.toJson(point));
+        getServletContext().setAttribute("hitState", hitState);
     }
 }
