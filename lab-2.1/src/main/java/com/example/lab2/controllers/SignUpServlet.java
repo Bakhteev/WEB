@@ -1,18 +1,19 @@
 package com.example.lab2.controllers;
 
+import com.example.lab2.dto.UserDto;
 import com.example.lab2.models.User;
 import com.example.lab2.services.AuthService;
 import com.example.lab2.services.JWTService;
 import com.example.lab2.state.HitState;
 import com.example.lab2.state.UserState;
 import com.example.lab2.utils.PasswordHash;
+import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 
 @WebServlet("/signup")
@@ -52,11 +53,12 @@ public class SignUpServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
+        UserDto userDto = new Gson().fromJson(req.getReader(), UserDto.class);
+        String email = userDto.getEmail();
+        String password = userDto.getPassword();
         if(!authService.validateCredentials(email, password)){
             res.setStatus(400);
-            res.getWriter().write("fuck u");
+            res.getWriter().print("Credentials are incorrect");
             return;
         }
         if(userState.getUserByEmail(email) != null){
@@ -73,7 +75,5 @@ public class SignUpServlet extends HttpServlet {
         getServletContext().setAttribute("userState", userState);
         getServletContext().setAttribute("hitState", hitState);
         res.sendRedirect("/");
-//        res.setHeader("Authorization", "Bearer " + jwtService.createJwtToken(user));
-//        getServletContext().getRequestDispatcher("/index.jsp").forward(req,res);
     }
 }

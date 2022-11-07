@@ -4,17 +4,14 @@ import com.example.lab2.services.JWTService;
 import com.example.lab2.state.UserState;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 import io.jsonwebtoken.*;
-//import io.jsonwebtoken.security.Keys;
 
 @WebFilter(urlPatterns = {"/", "/history",})
 public class AuthFilter extends HttpFilter {
@@ -41,9 +38,11 @@ public class AuthFilter extends HttpFilter {
 //        }
 //        String token = authorization.replaceAll("Bearer", "").trim();
         String token = "";
-        for (Cookie cookie : req.getCookies()) {
-            if (cookie.getName().equals("token")) {
-                token = cookie.getValue();
+        if (req.getCookies() != null) {
+            for (Cookie cookie : req.getCookies()) {
+                if (cookie.getName().equals("token")) {
+                    token = cookie.getValue();
+                }
             }
         }
 
@@ -56,8 +55,6 @@ public class AuthFilter extends HttpFilter {
             if (jwtService.authenticate(token)) {
                 chain.doFilter(req, res);
                 return;
-//                res.sendRedirect(req.getRequestURI());
-//                getServletContext().getRequestDispatcher(req.getRequestURI()).forward(req, res);
             }
         } catch (ExpiredJwtException e) {
             res.sendRedirect("/login");

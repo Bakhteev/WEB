@@ -5,7 +5,6 @@ import com.example.lab2.models.User;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
-import java.util.Objects;
 
 public class UserState {
     LinkedList<User> users = new LinkedList<>();
@@ -24,9 +23,6 @@ public class UserState {
                 userFound = user;
             }
         }
-//        if (userFound == null) {
-//            throw new NoSuchElementException("User not Found");
-//        }
         return userFound;
     }
 

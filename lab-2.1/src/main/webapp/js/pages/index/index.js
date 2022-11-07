@@ -1,17 +1,17 @@
 import {
-    convertXHumanReadable,
-    convertYHumanReadable,
-    getYCoordinate,
-    getXCoordinate,
-    convertYToGraphCoord,
-    convertXToGraphCoord,
-    tableCreator,
-    createRow
+  convertXHumanReadable,
+  convertYHumanReadable,
+  getYCoordinate,
+  getXCoordinate,
+  convertYToGraphCoord,
+  convertXToGraphCoord,
+  tableCreator,
+  createRow,
 } from './utils.js'
-import {CENTER_OF_GRAPH, GRAPH_SIZE, DEFAULT_SEGMENT} from './const.js'
+import { CENTER_OF_GRAPH, GRAPH_SIZE, DEFAULT_SEGMENT } from './const.js'
 
-import {wrongAnimation} from './animations.js'
-import {showPopUp} from './popup.js'
+import { wrongAnimation } from './animations.js'
+import { showPopUp } from '../../common/popup.js'
 import { fetchData } from './api.js'
 
 const graph = document.querySelector('#graph')
@@ -25,29 +25,38 @@ const checkLines = document.querySelectorAll('.hidden-line')
 const xPointer = document.querySelector('#x-pointer')
 const yPointer = document.querySelector('#y-pointer')
 const popUpCloseBtn = document.querySelector('.popup__close')
+const logoutBtn = document.querySelector('#logout')
 
 let rValue = 0
 let segment
 
 document.addEventListener('DOMContentLoaded', () => {
   ;(async () => {
-    const data = await fetchData('/history')
+    try {
+      const data = await fetchData('/history')
 
-    console.log(data)
-    data.length !== 0 && document
-      .querySelector('#result-table-body')
-      .insertAdjacentHTML('beforeend', tableCreator(data))
+      console.log(data)
+      data.length !== 0 &&
+        document
+          .querySelector('#result-table-body')
+          .insertAdjacentHTML('beforeend', tableCreator(data))
+    } catch (error) {
+      console.log(error)
+      showPopUp(true, error)
+    } finally {
+      showPopUp(false)
+    }
   })()
 })
 rSelect.addEventListener('change', (e) => {
-    console.log(e.target)
-    // rButtons.forEach((int) => {
-    //     int.checked = false
-    // })
-    // e.target.checked = true
-    rValue = +e.target.value
-    changeRValueLabels(rValue)
-    setLinesCoordinates(rValue)
+  console.log(e.target)
+  // rButtons.forEach((int) => {
+  //     int.checked = false
+  // })
+  // e.target.checked = true
+  rValue = +e.target.value
+  changeRValueLabels(rValue)
+  setLinesCoordinates(rValue)
 })
 // rButtons.forEach((el) => {
 //     el.addEventListener('change', (e) => {
@@ -62,101 +71,101 @@ rSelect.addEventListener('change', (e) => {
 // })
 
 xBtns.forEach((btn) => {
-    btn.addEventListener('change', (e) => {
-        xBtns.forEach((el) => el.checked = false)
-        e.target.checked = true
-    })
+  btn.addEventListener('change', (e) => {
+    xBtns.forEach((el) => (el.checked = false))
+    e.target.checked = true
+  })
 })
 
 popUpCloseBtn.addEventListener('click', () => {
-    showPopUp(false)
+  showPopUp(false)
 })
 
 //================================================================
 
 graph.addEventListener('click', (e) => {
-    e.preventDefault()
-    if (rValue === 0) {
-        showPopUp(true, 'Choose R value')
-    } else {
-        showPopUp(false)
+  e.preventDefault()
+  if (rValue === 0) {
+    showPopUp(true, 'Choose R value')
+  } else {
+    showPopUp(false)
 
-        let activeLine
-        dottedLines.forEach((line) => {
-            if (line.classList.contains('active')) activeLine = line
-        })
-        const x = activeLine ? activeLine.getAttribute('x1') : CENTER_OF_GRAPH
-        const y = yLine.getAttribute('y1')
-        setDot(x, y)
-        const convX = convertXHumanReadable(x, rValue)
-        const convY = convertYHumanReadable(y, rValue)
-        setInput(convX, convY)
-    }
+    let activeLine
+    dottedLines.forEach((line) => {
+      if (line.classList.contains('active')) activeLine = line
+    })
+    const x = activeLine ? activeLine.getAttribute('x1') : CENTER_OF_GRAPH
+    const y = yLine.getAttribute('y1')
+    setDot(x, y)
+    const convX = convertXHumanReadable(x, rValue)
+    const convY = convertYHumanReadable(y, rValue)
+    setInput(convX, convY)
+  }
 })
 
 graph.addEventListener('mousemove', (e) => {
-    if (rValue) {
-        yLine.classList.add('active')
-        const coord = getYCoordinate(e)
-        const limit = GRAPH_SIZE / rValue
-        if (coord > CENTER_OF_GRAPH) {
-            yLine.setAttribute(
-                'y1',
-                coord <= CENTER_OF_GRAPH + limit ? coord : CENTER_OF_GRAPH + limit
-            )
-            yLine.setAttribute(
-                'y2',
-                coord <= CENTER_OF_GRAPH + limit ? coord : CENTER_OF_GRAPH + limit
-            )
-        } else {
-            yLine.setAttribute(
-                'y1',
-                coord >= CENTER_OF_GRAPH - limit ? coord : CENTER_OF_GRAPH - limit
-            )
-            yLine.setAttribute(
-                'y2',
-                coord >= CENTER_OF_GRAPH - limit ? coord : CENTER_OF_GRAPH - limit
-            )
-        }
+  if (rValue) {
+    yLine.classList.add('active')
+    const coord = getYCoordinate(e)
+    const limit = GRAPH_SIZE / rValue
+    if (coord > CENTER_OF_GRAPH) {
+      yLine.setAttribute(
+        'y1',
+        coord <= CENTER_OF_GRAPH + limit ? coord : CENTER_OF_GRAPH + limit
+      )
+      yLine.setAttribute(
+        'y2',
+        coord <= CENTER_OF_GRAPH + limit ? coord : CENTER_OF_GRAPH + limit
+      )
+    } else {
+      yLine.setAttribute(
+        'y1',
+        coord >= CENTER_OF_GRAPH - limit ? coord : CENTER_OF_GRAPH - limit
+      )
+      yLine.setAttribute(
+        'y2',
+        coord >= CENTER_OF_GRAPH - limit ? coord : CENTER_OF_GRAPH - limit
+      )
     }
+  }
 })
 
 checkLines.forEach((line) => {
-    line.addEventListener('mouseover', (e) => {
-        dottedLines.forEach((xline) => {
-            if (e.target.dataset['number'] === xline.dataset['number']) {
-                xline.classList.add('active')
-            }
-        })
+  line.addEventListener('mouseover', (e) => {
+    dottedLines.forEach((xline) => {
+      if (e.target.dataset['number'] === xline.dataset['number']) {
+        xline.classList.add('active')
+      }
     })
+  })
 
-    line.addEventListener('mouseout', (e) => {
-        let attr = e.target.dataset['number']
-        const coordX = getXCoordinate(e)
-        if (
-            coordX <
-            CENTER_OF_GRAPH + segment * Math.floor(checkLines.length / 2)
-        ) {
-            dottedLines.forEach((dotLine) => {
-                if (dotLine.dataset['number'] == attr) {
-                    dotLine.classList.remove('active')
-                }
-            })
+  line.addEventListener('mouseout', (e) => {
+    let attr = e.target.dataset['number']
+    const coordX = getXCoordinate(e)
+    if (
+      coordX <
+      CENTER_OF_GRAPH + segment * Math.floor(checkLines.length / 2)
+    ) {
+      dottedLines.forEach((dotLine) => {
+        if (dotLine.dataset['number'] == attr) {
+          dotLine.classList.remove('active')
         }
-    })
+      })
+    }
+  })
 })
 
 //================================================================
 
 function changeRValueLabels(rValue) {
-    const rlablesWhole = document.querySelectorAll('.graph-label.r-whole-pos')
-    const rlablesHalf = document.querySelectorAll('.graph-label.r-half-pos')
-    const rlablesNegWhole = document.querySelectorAll('.graph-label.r-whole-neg')
-    const rlablesNegHalf = document.querySelectorAll('.graph-label.r-half-neg')
-    rlablesWhole.forEach((el) => (el.textContent = rValue))
-    rlablesHalf.forEach((el) => (el.textContent = rValue / 2))
-    rlablesNegWhole.forEach((el) => (el.textContent = -rValue))
-    rlablesNegHalf.forEach((el) => (el.textContent = -(rValue / 2)))
+  const rlablesWhole = document.querySelectorAll('.graph-label.r-whole-pos')
+  const rlablesHalf = document.querySelectorAll('.graph-label.r-half-pos')
+  const rlablesNegWhole = document.querySelectorAll('.graph-label.r-whole-neg')
+  const rlablesNegHalf = document.querySelectorAll('.graph-label.r-half-neg')
+  rlablesWhole.forEach((el) => (el.textContent = rValue))
+  rlablesHalf.forEach((el) => (el.textContent = rValue / 2))
+  rlablesNegWhole.forEach((el) => (el.textContent = -rValue))
+  rlablesNegHalf.forEach((el) => (el.textContent = -(rValue / 2)))
 }
 
 const form = document.querySelector('#form')
@@ -213,7 +222,9 @@ form.addEventListener('submit', (e) => {
         .querySelector('#result-table-body')
         .insertAdjacentHTML('afterbegin', createRow(res))
     } catch (error) {
-      alert(error)
+      console.log(error)
+      showPopUp(true, error)
+      //   alert(error)
     }
   })()
 })
@@ -222,66 +233,71 @@ const countEvenLineCoord = (shift) => CENTER_OF_GRAPH - segment * shift
 const countOddLineCoord = (shift) => CENTER_OF_GRAPH + segment * shift
 
 function setLinesCoordinates(rValue) {
-    segment = DEFAULT_SEGMENT / rValue
-    let shift = 1
-    for (let i = 0; i < dottedLines.length - 1; i += 2) {
-        const evenLineCoord = countEvenLineCoord(shift)
-        const oddLineCoord = countOddLineCoord(shift)
-        dottedLines[i].setAttribute('x1', evenLineCoord)
-        dottedLines[i].setAttribute('x2', evenLineCoord)
-        dottedLines[i + 1].setAttribute('x1', oddLineCoord)
-        dottedLines[i + 1].setAttribute('x2', oddLineCoord)
-        checkLines[i].setAttribute('x1', evenLineCoord)
-        checkLines[i].setAttribute('x2', evenLineCoord)
-        checkLines[i + 1].setAttribute('x1', oddLineCoord)
-        checkLines[i + 1].setAttribute('x2', oddLineCoord)
-        checkLines[i].setAttribute('stroke-width', segment)
-        checkLines[i + 1].setAttribute('stroke-width', segment)
-        checkLines[i].classList.remove('inactive')
-        checkLines[i + 1].classList.remove('inactive')
-        shift++
-    }
-    checkLines[checkLines.length - 1].setAttribute(
-        'x1',
-        countEvenLineCoord(shift)
-    )
-    checkLines[checkLines.length - 1].setAttribute(
-        'x2',
-        countEvenLineCoord(shift)
-    )
-    dottedLines[dottedLines.length - 1].setAttribute(
-        'x1',
-        countEvenLineCoord(shift)
-    )
-    dottedLines[dottedLines.length - 1].setAttribute(
-        'x2',
-        countEvenLineCoord(shift)
-    )
-    checkLines[checkLines.length - 1].classList.remove('inactive')
+  segment = DEFAULT_SEGMENT / rValue
+  let shift = 1
+  for (let i = 0; i < dottedLines.length - 1; i += 2) {
+    const evenLineCoord = countEvenLineCoord(shift)
+    const oddLineCoord = countOddLineCoord(shift)
+    dottedLines[i].setAttribute('x1', evenLineCoord)
+    dottedLines[i].setAttribute('x2', evenLineCoord)
+    dottedLines[i + 1].setAttribute('x1', oddLineCoord)
+    dottedLines[i + 1].setAttribute('x2', oddLineCoord)
+    checkLines[i].setAttribute('x1', evenLineCoord)
+    checkLines[i].setAttribute('x2', evenLineCoord)
+    checkLines[i + 1].setAttribute('x1', oddLineCoord)
+    checkLines[i + 1].setAttribute('x2', oddLineCoord)
+    checkLines[i].setAttribute('stroke-width', segment)
+    checkLines[i + 1].setAttribute('stroke-width', segment)
+    checkLines[i].classList.remove('inactive')
+    checkLines[i + 1].classList.remove('inactive')
+    shift++
+  }
+  checkLines[checkLines.length - 1].setAttribute(
+    'x1',
+    countEvenLineCoord(shift)
+  )
+  checkLines[checkLines.length - 1].setAttribute(
+    'x2',
+    countEvenLineCoord(shift)
+  )
+  dottedLines[dottedLines.length - 1].setAttribute(
+    'x1',
+    countEvenLineCoord(shift)
+  )
+  dottedLines[dottedLines.length - 1].setAttribute(
+    'x2',
+    countEvenLineCoord(shift)
+  )
+  checkLines[checkLines.length - 1].classList.remove('inactive')
 }
 
 function setDot(x, y) {
-    circle.setAttribute('cx', x)
-    circle.setAttribute('cy', y)
-    xPointer.setAttribute('x1', x)
-    xPointer.setAttribute('y1', y)
-    xPointer.setAttribute('y2', y)
-    yPointer.setAttribute('y1', y)
-    yPointer.setAttribute('x1', x)
-    yPointer.setAttribute('x2', x)
-    xPointer.classList.add('pointer')
-    yPointer.classList.add('pointer')
-    xPointer.classList.remove('inactive')
-    yPointer.classList.remove('inactive')
-    circle.classList.remove('inactive')
+  circle.setAttribute('cx', x)
+  circle.setAttribute('cy', y)
+  xPointer.setAttribute('x1', x)
+  xPointer.setAttribute('y1', y)
+  xPointer.setAttribute('y2', y)
+  yPointer.setAttribute('y1', y)
+  yPointer.setAttribute('x1', x)
+  yPointer.setAttribute('x2', x)
+  xPointer.classList.add('pointer')
+  yPointer.classList.add('pointer')
+  xPointer.classList.remove('inactive')
+  yPointer.classList.remove('inactive')
+  circle.classList.remove('inactive')
 }
 
 function setInput(x, y) {
-    xBtns.forEach((btn) => {
-        btn.checked = false
-        if (+btn.value === x) {
-            btn.checked = true
-        }
-    })
-    yInput.value = y
+  xBtns.forEach((btn) => {
+    btn.checked = false
+    if (+btn.value === x) {
+      btn.checked = true
+    }
+  })
+  yInput.value = y
 }
+
+logoutBtn.addEventListener('click', () => {
+  document.cookie = ''
+  location.href = window.location + 'login'
+})

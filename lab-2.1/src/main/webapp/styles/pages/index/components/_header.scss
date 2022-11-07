@@ -9,4 +9,14 @@
       margin-right: 0;
     }
   }
+  &__btn{
+    color: #ffffff;
+    background: transparent;
+    cursor: pointer;
+    transition: 0.2s;
+    border: none;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
 }

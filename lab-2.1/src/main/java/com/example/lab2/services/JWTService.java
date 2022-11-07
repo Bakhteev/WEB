@@ -5,7 +5,6 @@ import com.example.lab2.state.UserState;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 
 import javax.crypto.SecretKey;
@@ -28,7 +27,6 @@ public class JWTService {
                 .build()
                 .parseClaimsJws(token);
         String email = (String) jwsClaims.getBody().get("email");
-        System.out.println(userState.getUserByEmail(email));
         return userState.getUserByEmail(email) != null;
     }
 
@@ -38,7 +36,6 @@ public class JWTService {
                 .build()
                 .parseClaimsJws(token);
         String email = (String) jwsClaims.getBody().get("email");
-        System.out.println(userState.getUserByEmail(email));
         return userState.getUserByEmail(email);
     }
 
@@ -47,7 +44,7 @@ public class JWTService {
                 .claim("email", user.getEmail())
                 .claim("userId", user.getId())
                 .signWith(key)
-                .setExpiration(new Date(new Date().getTime() + (1000 * 60 * 24)))
+                .setExpiration(new Date(new Date().getTime() + (1000 * 60 * 60 * 24)))
                 .compact();
     }
 }

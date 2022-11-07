@@ -1,6 +1,3 @@
-<%@ page import="com.example.lab2.models.Point" %>
-<%@ page import="java.util.Arrays" %>
-<%@ page import="com.example.lab2.state.StateBean" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

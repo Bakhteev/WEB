@@ -38,8 +38,8 @@ public class AreaCheckServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        String error = "";
-        Point point = null;
+        String error;
+        Point point;
         int x;
         float y;
         float r;
@@ -51,8 +51,7 @@ public class AreaCheckServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             res.setStatus(400);
             error = "Wrong number format";
-            req.setAttribute("error", error);
-            getServletContext().getRequestDispatcher("/error.jsp").forward(req, res);
+            res.getWriter().write(error);
             return;
         }
 
@@ -68,12 +67,12 @@ public class AreaCheckServlet extends HttpServlet {
 
             point = new Point(x, y, r, hitted, date, executionTime);
         } catch (InvalidParameterException e) {
-            res.setStatus(400);
             error = e.getMessage();
-            req.setAttribute("error", error);
-            getServletContext().getRequestDispatcher("/error.jsp").forward(req, res);
+            res.setStatus(400);
+            res.getWriter().write(error);
             return;
         }
+        res.setContentType("application/json");
         String token = Objects.requireNonNull(CookieParser.getCookie(req, "token")).getValue();
         int userId = jwtService.getUserFromToken(token).getId();
         hitState.add(userId, point);

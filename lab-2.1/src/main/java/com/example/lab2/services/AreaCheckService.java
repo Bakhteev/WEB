@@ -28,15 +28,9 @@ public class AreaCheckService {
         if (x >= 0 && y >= 0 && x <= r && y <= r) {
             return true;
         } else if (x <= 0 && y <= 0) {
-            if (y >= -2 * x - r) {
-                return true;
-            }
-            return false;
+            return y >= -2 * x - r;
         } else if (x <= 0 && y >= 0) {
-            if ((Math.pow(x, 2) + Math.pow(y, 2)) <= Math.pow(r, 2)) {
-                return true;
-            }
-            return false;
+            return (Math.pow(x, 2) + Math.pow(y, 2)) <= Math.pow(r, 2);
         } else return false;
     }
 }

@@ -1,11 +1,13 @@
 package com.example.lab2.controllers;
 
+import com.example.lab2.dto.UserDto;
 import com.example.lab2.models.User;
 import com.example.lab2.services.AuthService;
 import com.example.lab2.services.JWTService;
 import com.example.lab2.state.HitState;
 import com.example.lab2.state.UserState;
 import com.example.lab2.utils.PasswordHash;
+import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
@@ -51,30 +53,32 @@ public class LogInServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
+        UserDto userDto = new Gson().fromJson(req.getReader(), UserDto.class);
+        String email = userDto.getEmail();
+        String password = userDto.getPassword();
         if (!authService.validateCredentials(email, password)) {
             res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            res.getWriter().write("fuck u");
+            res.getWriter().write("Credentials is incorrect");
             return;
         }
         User user = userState.getUserByEmail(email);
-        if(user == null){
+        if (user == null) {
             res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             res.getWriter().write("Wrong email or password");
             res.sendRedirect("/signup");
-            getServletContext().getRequestDispatcher("/auth.jsp").forward(req,res);
+            getServletContext().getRequestDispatcher("/auth.jsp").forward(req, res);
             return;
         }
-        if(!(user.getPasswordHash().equals(PasswordHash.generateHashedPassword(password)))){
+        if (!(user.getPasswordHash().equals(PasswordHash.generateHashedPassword(password)))) {
             res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             res.getWriter().write("Wrong password or email");
             return;
         }
-        res.addCookie(new Cookie("token", jwtService.createJwtToken(user)));
+        Cookie cookie = new Cookie("token", jwtService.createJwtToken(user));
+        cookie.setMaxAge(1000 * 60 * 60 * 24);
+        res.addCookie(cookie);
         getServletContext().setAttribute("userState", userState);
         getServletContext().setAttribute("hitState", hitState);
         res.sendRedirect("/");
-//        getServletContext().getRequestDispatcher("/index.jsp").forward(req,res);
     }
 }
