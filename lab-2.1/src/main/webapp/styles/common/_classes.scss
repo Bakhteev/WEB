@@ -1,0 +1,25 @@
+.my-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.flex {
+  display: flex;
+}
+.btn {
+  border: 1px solid transparent;
+  padding: 12px 40px;
+  font-size: 16px;
+  background-color: $bg-color;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+  cursor: pointer;
+  outline: none;
+  transition: 0.3s all;
+  &:hover {
+    background: transparent;
+    color: teal;
+    border-color: teal;
+  }
+}
