@@ -44,7 +44,6 @@ public class AreaCheckServlet extends HttpServlet {
         float y;
         float r;
         try {
-
             x = Integer.parseInt(req.getParameter("x"));
             y = Float.parseFloat(req.getParameter("y"));
             r = Float.parseFloat(req.getParameter("r"));
@@ -73,8 +72,9 @@ public class AreaCheckServlet extends HttpServlet {
             return;
         }
         res.setContentType("application/json");
+        res.setStatus(201);
         String token = Objects.requireNonNull(CookieParser.getCookie(req, "token")).getValue();
-        int userId = jwtService.getUserFromToken(token).getId();
+        int userId = (int) jwtService.getClaims(token).getBody().get("userId");
         hitState.add(userId, point);
         res.getWriter().write(gson.toJson(point));
         getServletContext().setAttribute("hitState", hitState);

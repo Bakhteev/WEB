@@ -8,6 +8,7 @@ import com.example.lab2.state.HitState;
 import com.example.lab2.state.UserState;
 import com.example.lab2.utils.PasswordHash;
 import com.google.gson.Gson;
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
@@ -24,8 +25,15 @@ public class LogInServlet extends HttpServlet {
     JWTService jwtService;
     HitState hitState;
 
+
+//    @Override
+//    public void init() throws ServletException {
+//        super.init();
+//    }
+
     @Override
-    public void init() throws ServletException {
+    public void init(ServletConfig conf) throws ServletException {
+        super.init(conf);
         userState = (UserState) getServletContext().getAttribute("userState");
         hitState = (HitState) getServletContext().getAttribute("hitState");
         if (userState == null) {
@@ -52,12 +60,12 @@ public class LogInServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         UserDto userDto = new Gson().fromJson(req.getReader(), UserDto.class);
         String email = userDto.getEmail();
         String password = userDto.getPassword();
         if (!authService.validateCredentials(email, password)) {
-            res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            res.setStatus(400);
             res.getWriter().write("Credentials is incorrect");
             return;
         }

@@ -14,7 +14,7 @@ import java.util.Date;
 
 public class JWTService {
 
-    private SecretKey key = Keys.hmacShaKeyFor("RcMyNrPkhkXUi3hx0h1skhsdbhjbvhejvbjmdbvjhervmcv".getBytes(StandardCharsets.UTF_8));
+    private final SecretKey key = Keys.hmacShaKeyFor("RcMyNrPkhkXUi3hx0h1skhsdbhjbvhejvbjmdbvjhervmcv".getBytes(StandardCharsets.UTF_8));
     UserState userState;
 
     public JWTService(UserState userState) {
@@ -30,13 +30,11 @@ public class JWTService {
         return userState.getUserByEmail(email) != null;
     }
 
-    public User getUserFromToken(String token) {
-        Jws<Claims> jwsClaims = Jwts.parserBuilder()
+    public Jws<Claims> getClaims(String token) {
+        return Jwts.parserBuilder()
                 .setSigningKey(key)
                 .build()
                 .parseClaimsJws(token);
-        String email = (String) jwsClaims.getBody().get("email");
-        return userState.getUserByEmail(email);
     }
 
     public String createJwtToken(User user) {

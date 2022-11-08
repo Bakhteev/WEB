@@ -14,6 +14,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 
 @WebServlet("/signup")
@@ -56,12 +57,12 @@ public class SignUpServlet extends HttpServlet {
         UserDto userDto = new Gson().fromJson(req.getReader(), UserDto.class);
         String email = userDto.getEmail();
         String password = userDto.getPassword();
-        if(!authService.validateCredentials(email, password)){
+        if (!authService.validateCredentials(email, password)) {
             res.setStatus(400);
             res.getWriter().print("Credentials are incorrect");
             return;
         }
-        if(userState.getUserByEmail(email) != null){
+        if (userState.getUserByEmail(email) != null) {
             res.setStatus(400);
             res.getWriter().write("This email has already registered");
             return;
@@ -69,9 +70,9 @@ public class SignUpServlet extends HttpServlet {
         User user = new User(email, PasswordHash.generateHashedPassword(password));
         userState.addUser(user);
         hitState.createUsersList(user.getId());
-
-        res.addCookie(new Cookie("token", jwtService.createJwtToken(user)));
-
+        Cookie cookie = new Cookie("token", jwtService.createJwtToken(user));
+        cookie.setMaxAge(1000 * 60 * 60 * 24);
+        res.addCookie(cookie);
         getServletContext().setAttribute("userState", userState);
         getServletContext().setAttribute("hitState", hitState);
         res.sendRedirect("/");

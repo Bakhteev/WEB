@@ -32,7 +32,7 @@ public class HistoryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         String token = Objects.requireNonNull(CookieParser.getCookie(req, "token")).getValue();
-        int userId = jwtService.getUserFromToken(token).getId();
+        int userId = (int) jwtService.getClaims(token).getBody().get("userId");
         currentUsersList = hitState.getList(userId);
         res.setStatus(200);
         res.setContentType("application/json");

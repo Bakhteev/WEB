@@ -2,6 +2,7 @@ package com.example.lab2.filters;
 
 import com.example.lab2.services.JWTService;
 import com.example.lab2.state.UserState;
+import com.example.lab2.utils.CookieParser;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.Cookie;
@@ -37,16 +38,14 @@ public class AuthFilter extends HttpFilter {
 //            return;
 //        }
 //        String token = authorization.replaceAll("Bearer", "").trim();
-        String token = "";
-        if (req.getCookies() != null) {
-            for (Cookie cookie : req.getCookies()) {
-                if (cookie.getName().equals("token")) {
-                    token = cookie.getValue();
-                }
-            }
-        }
+
+        Cookie cookie = CookieParser.getCookie(req, "token");
+        String token = cookie == null ? "" : cookie.getValue();
 
         if (token.length() == 0) {
+            res.setStatus(301);
+//            res.setHeader("Location", "http://localhost:8000/login");
+//            System.out.println(req.getRequestURI());
             res.sendRedirect("/login");
             getServletContext().getRequestDispatcher("/login").forward(req, res);
             return;
@@ -57,10 +56,15 @@ public class AuthFilter extends HttpFilter {
                 return;
             }
         } catch (ExpiredJwtException e) {
+            res.setStatus(301);
+
             res.sendRedirect("/login");
-            getServletContext().getRequestDispatcher("/login").forward(req, res);
+            System.out.println(req.getRequestURI());
+
+//            getServletContext().getRequestDispatcher("/login").forward(req, res);
         }
+        res.setStatus(301);
         res.sendRedirect("/login");
-        getServletContext().getRequestDispatcher("/login").forward(req, res);
+//        getServletContext().getRequestDispatcher("/login").forward(req, res);
     }
 }

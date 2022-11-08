@@ -15,6 +15,10 @@
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.10" />
+          <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpclient:4.5.13" />
+          <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpcore:4.4.13" />
+          <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.2" />
+          <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.11" />
           <element id="library" level="project" name="Maven: io.jsonwebtoken:jjwt-api:0.11.5" />
           <element id="library" level="project" name="Maven: io.jsonwebtoken:jjwt-impl:0.11.5" />
           <element id="library" level="project" name="Maven: io.jsonwebtoken:jjwt-jackson:0.11.5" />
