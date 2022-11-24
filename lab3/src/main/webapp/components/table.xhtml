@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:panelGroup styleClass="history" id="history">
+    <p:dataTable var="point" value="#{pointBeanWorker.pointsState}" id="result-table-body" emptyMessage="Shoot history is empty">
+        <p:column headerText="X value">
+            <h:outputText value="#{point.XValue}">
+                <f:convertNumber pattern="#0.0"/>
+            </h:outputText>
+        </p:column>
+
+        <p:column headerText="Y value">
+            <h:outputText value="#{point.YValue}">
+                <f:convertNumber pattern="#0.0"/>
+            </h:outputText>
+        </p:column>
+
+        <p:column headerText="R value">
+            <h:outputText value="#{point.RValue}"/>
+        </p:column>
+
+        <p:column headerText="Area hit">
+            <h:outputText value="#{point.hit}"/>
+        </p:column>
+        <p:column headerText="Date">
+            <h:outputText value="#{point.date}"/>
+        </p:column>
+        <p:column headerText="Lead time">
+            <h:outputText value="#{point.leadTime} ms"/>
+        </p:column>
+    </p:dataTable>
+</h:panelGroup>
+</html>

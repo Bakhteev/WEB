@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+<h:head>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <h:outputStylesheet library="css" name="index.css"/>
+    <title>Document</title>
+</h:head>
+<h:body>
+    <ui:include src="./components/header.xhtml"/>
+    <div class="main">
+        <div class="container">
+            <div class="row between-xs">
+                <div class="col-lg-5 col-md-12">
+                    <h:panelGroup class="main__graph" id="main-graph">
+                        <ui:include src="./components/graph.xhtml"/>
+                    </h:panelGroup>
+                    <ui:include src="./components/form.xhtml"/>
+                </div>
+                <div class="col-lg-7 col-md-12">
+                    <ui:include src="components/table.xhtml"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h:outputScript library="js" name="index.js"/>
+</h:body>
+</html>

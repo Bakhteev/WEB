@@ -322,7 +322,7 @@
               class="form"
               id="form"
               style="margin-top: 30px"
-              method="GET"
+              method="POST"
               action="/"
             >
               <div class="X-panel flex">

@@ -1,0 +1,23 @@
+<!--<!DOCTYPE web-app PUBLIC-->
+<!--        "-//Sun Microsystems, Inc.//DTD Web Application 3.0//EN"-->
+<!--        "http://java.sun.com/dtd/web-app_2_3.dtd">-->
+
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         version="5.0">
+    <welcome-file-list>
+        <welcome-file>index.xhtml</welcome-file>
+    </welcome-file-list>
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+        <url-pattern>*.jsf</url-pattern>
+        <url-pattern>/icefaces/*</url-pattern>
+    </servlet-mapping>
+</web-app>

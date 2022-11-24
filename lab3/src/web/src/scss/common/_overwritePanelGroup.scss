@@ -1,0 +1,87 @@
+body {
+  .ui-slider {
+    .ui-slider-range {
+      background: $bg-color;
+    }
+
+    .ui-state-default {
+      border-color: $bg-color;
+    }
+
+    .ui-slider-handle.ui-state-hover {
+      border-color: $bg-color;
+      background: $bg-color;
+    }
+  }
+
+  .ui-inputfield {
+    padding: 1px 2px;
+
+    &.ui-state-focus {
+      border-color: $bg-color;
+      box-shadow: 0 0 0 0.2em rgba(0, 128, 128, 0.5);
+    }
+  }
+
+  .ui-inputfield.ui-state-hover {
+    border-color: $bg-color;
+  }
+
+  .ui-selectbooleanbutton.ui-state-active,
+  .ui-selectonebutton > .ui-button.ui-state-active,
+  .ui-selectmanybutton > .ui-button.ui-state-active,
+  .ui-selectbooleanbutton.ui-state-active:not(.ui-state-disabled):hover,
+  .ui-selectonebutton
+  > .ui-button.ui-state-active:not(.ui-state-disabled):hover,
+  .ui-selectmanybutton
+  > .ui-button.ui-state-active:not(.ui-state-disabled):hover {
+    background: $bg-color;
+    border-color: $bg-color;
+  }
+
+  .ui-button.ui-state-focus {
+    border-color: $bg-color;
+    box-shadow: 0 0 0 0.2em rgba(0, 128, 128, 0.5);
+  }
+
+  .ui-datatable {
+    thead {
+      th {
+        background: teal;
+        color: white;
+        padding: 10px 5px;
+        text-align: center;
+        border: none;
+      }
+    }
+  }
+
+  .ui-datatable .ui-datatable-data > tr > td {
+    text-align: center;
+    padding: 4px;
+  }
+
+  .ui-datatable thead th .ui-column-title {
+    vertical-align: baseline;
+  }
+
+  //.ui-datatable-tablewrapper > table{
+  //  border: 1px solid $bg-color;
+  //}
+
+  .ui-datatable-tablewrapper{
+    border: 1px solid $bg-color;
+    overflow-y: scroll;
+    height: 505px;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  //.ui-datatable.ui-widget{
+  //  overflow-y: scroll;
+  //  height: 505px;
+  //  &::-webkit-scrollbar {
+  //    display: none;
+  //  }
+  //}
+}

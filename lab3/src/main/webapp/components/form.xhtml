@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+    <h:form
+            class="form"
+            id="form"
+            style="margin-top: 30px"
+            method="POST"
+            action="/"
+    >
+        <div class="x-panel form__panel flex">
+            <h4 class="form__title" style="margin-top: -20px;">X value:</h4>
+            <h:panelGroup style="margin-bottom: 10px">
+                <p:inputText id="x-value" value="#{pointBean.XValue}"/>
+                <p:slider for="@previous" minValue="-5" maxValue="5" step="0.1" range="max"/>
+            </h:panelGroup>
+        </div>
+        <div class="y-panel form__panel">
+            <h:panelGroup class="ui-float-label">
+                <p:inputText id="y-input" value="#{pointBean.YValue}"/>
+                <p:outputLabel for="@previous" value="Y value"/>
+            </h:panelGroup>
+        </div>
+        <h:panelGroup styleClass="r-panel form__panel flex">
+            <h4 class="form__title">Choose r value: </h4>
+            <p:selectOneButton value="#{pointBean.RValue}" id="rValues">
+                <f:selectItem itemLabel="1" itemValue="1"/>
+                <f:selectItem itemLabel="2" itemValue="2"/>
+                <f:selectItem itemLabel="3" itemValue="3"/>
+                <f:selectItem itemLabel="4" itemValue="4"/>
+                <f:selectItem itemLabel="5" itemValue="5"/>
+            </p:selectOneButton>
+        </h:panelGroup>
+        <h:commandButton
+                class="btn"
+                type="submit"
+                id="submit"
+                value="Submit"
+                action="#{pointBeanWorker.addPoint}"
+        >
+            <f:ajax execute="@form" render="history main-graph"/>
+<!--            <f:ajax execute="@form" render="history main-graph errors"/>-->
+        </h:commandButton>
+    </h:form>
+</ui:composition>
+</html>
