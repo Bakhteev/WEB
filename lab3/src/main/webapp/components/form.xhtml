@@ -7,6 +7,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <ui:composition>
+
     <h:form
             class="form"
             id="form"
@@ -17,14 +18,22 @@
         <div class="x-panel form__panel flex">
             <h4 class="form__title" style="margin-top: -20px;">X value:</h4>
             <h:panelGroup style="margin-bottom: 10px">
-                <p:inputText id="x-value" value="#{pointBean.XValue}"/>
+                <p:inputText id="x-value" value="#{pointBean.XValue}" converterMessage="Y must be a number">
+                    <f:validator validatorId="xYValidator"/>
+                    <p:ajax update="x-value-msg" event="keyup"/>
+                </p:inputText>
                 <p:slider for="@previous" minValue="-5" maxValue="5" step="0.1" range="max"/>
+                <p:message for="x-value" display="tooltip" id="x-value-msg"/>
             </h:panelGroup>
         </div>
         <div class="y-panel form__panel">
             <h:panelGroup class="ui-float-label">
-                <p:inputText id="y-input" value="#{pointBean.YValue}"/>
+                <p:inputText id="y-input" value="#{pointBean.YValue}">
+                    <f:validator validatorId="xYValidator"/>
+                    <p:ajax update="y-value-msg" event="keyup"/>
+                </p:inputText>
                 <p:outputLabel for="@previous" value="Y value"/>
+                <p:message for="y-input" id="y-value-msg" display="tooltip"/>
             </h:panelGroup>
         </div>
         <h:panelGroup styleClass="r-panel form__panel flex">
@@ -42,10 +51,10 @@
                 type="submit"
                 id="submit"
                 value="Submit"
+                update="@form"
                 action="#{pointBeanWorker.addPoint}"
         >
             <f:ajax execute="@form" render="history main-graph"/>
-<!--            <f:ajax execute="@form" render="history main-graph errors"/>-->
         </h:commandButton>
     </h:form>
 </ui:composition>

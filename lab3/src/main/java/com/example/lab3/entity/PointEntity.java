@@ -30,6 +30,14 @@ public class PointEntity {
     @Column
     private long leadTime;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private UserEntity userEntity;
+
+    @ManyToOne
+    @JoinColumn(name = "users_id", referencedColumnName = "id")
+    private UserEntity users;
+
     public PointEntity(PointDto pointDto) {
         this.xValue = pointDto.getXValue();
         this.yValue = pointDto.getYValue();

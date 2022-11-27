@@ -1,4 +1,4 @@
-package com.example.lab3.beans;
+package com.example.lab3.controllers;
 
 
 import com.example.lab3.dto.PointDto;
@@ -27,9 +27,12 @@ public class PointBeanWorker {
     }
 
     public void addPoint() {
-        PointDto point = pointBean.createPoint();
-        pointsState.add(point);
-        pointService.addPoint(point);
+        try {
+            PointDto point = pointBean.createPoint();
+            pointsState.add(point);
+            pointService.addPoint(point);
+        } catch (Exception ignored) {
+        }
     }
 
     public List<PointDto> getPointsState() {

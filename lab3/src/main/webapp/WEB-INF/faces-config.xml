@@ -24,7 +24,11 @@
 <!--    </navigation-rule>-->
 <!--    <managed-bean>-->
 <!--        <managed-bean-name>testBean</managed-bean-name>-->
-<!--        <managed-bean-class>com.example.lab3.beans.TestBean</managed-bean-class>-->
+<!--        <managed-bean-class>com.example.lab3.controllers.TestBean</managed-bean-class>-->
 <!--        <managed-bean-scope>application</managed-bean-scope>-->
 <!--    </managed-bean>-->
+    <validator>
+        <validator-id>xYValidator</validator-id>
+        <validator-class>com.example.lab3.validators.XYValidator</validator-class>
+    </validator>
 </faces-config>

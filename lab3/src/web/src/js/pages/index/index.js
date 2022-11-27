@@ -1,9 +1,10 @@
 import "../../common/shoError.js"
+
 const rSelect = document.querySelectorAll('#form\\:rValues input')
-const circle = document.querySelector('.dot')
+
 const yInput = document.querySelector("#form\\:y-input");
 const xInput = document.querySelector("#form\\:x-value");
-let graph = document.querySelector(".main__graph");
+let graph = document.querySelector("#graph");
 const dottedLines = document.querySelectorAll(".dotted-line");
 let yLine = document.querySelector("#y-line");
 let xLine = document.querySelector("#x-line");
@@ -38,7 +39,9 @@ document.addEventListener("DOMContentLoaded", () => {
 //     })
 // })
 
-graph.addEventListener("mousemove", (e) => {
+graph.addEventListener("mousemove", graphMouseMove);
+
+function graphMouseMove(e) {
     const coord = e.offsetY - 20 * (e.offsetY / 320);
     yLine.setAttribute("stroke", "red");
     if (rValue) {
@@ -72,9 +75,11 @@ graph.addEventListener("mousemove", (e) => {
         xLine.setAttribute("x1", coordX);
         xLine.setAttribute("x2", coordX);
     }
-});
+}
 
-graph.addEventListener("mouseenter", () => {
+graph.addEventListener("mouseenter", graphMouseEnter);
+
+function graphMouseEnter(e) {
     rSelect.forEach(el => {
         if (el.checked) {
             rValue = +el.value;
@@ -83,15 +88,19 @@ graph.addEventListener("mouseenter", () => {
     yLine = document.querySelector("#y-line");
     xLine = document.querySelector("#x-line");
     changeRText(rValue)
-});
+}
 
-graph.addEventListener("click", (event) => {
+
+
+graph.addEventListener("click", graphClick);
+
+function graphClick(e){
     setDot(xLine.getAttribute("x1"), yLine.getAttribute("y1"))
     const x = +(((xLine.getAttribute("x1") - 150) / 100) * +rValue).toFixed(1);
     const y = +(-((yLine.getAttribute("y1") - 150) / 100) * +rValue).toFixed(1);
     xInput.value = x
     yInput.value = y
-});
+}
 
 graph.addEventListener("mouseleave", () => {
     yLine.setAttribute("stroke", "transparent");
@@ -116,6 +125,7 @@ function changeRText(rValue) {
 }
 
 function setDot(x, y) {
+    const circle = document.querySelector('#graph .dot')
     circle.setAttribute('cx', x)
     circle.setAttribute('cy', y)
     circle.classList.remove('inactive')

@@ -1,4 +1,4 @@
-package com.example.lab3.beans;
+package com.example.lab3.controllers;
 
 import com.example.lab3.dto.PointDto;
 import com.example.lab3.services.HitService;
@@ -10,10 +10,7 @@ import lombok.*;
 import java.io.Serializable;
 import java.security.InvalidParameterException;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 
 @Named(value = "pointBean")
 @ApplicationScoped
