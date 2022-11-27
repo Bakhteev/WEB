@@ -1,0 +1,53 @@
+@import 'src/scss/common/base';
+@import 'src/scss/pages/auth/components/index';
+@import 'src/scss/pages/index/components/popup';
+
+.auth {
+  min-height: 100vh;
+
+  &__wrapper {
+    border-radius: 16px;
+    border: 1px solid $bg-color;
+    padding: 10px 30px;
+  }
+
+  &__title {
+    text-align: center;
+    font-size: 20px;
+  }
+
+  //&__form {
+  //  padding: 10px 30px;
+  //}
+  &__btn {
+    padding: 5px;
+    color: #ffffff;
+    border-radius: 7px;
+  }
+
+  &__link {
+  }
+}
+
+.form {
+  &__wrapper {
+    margin: 20px 0;
+  }
+
+  &__input {
+    margin-top: 15px;
+    padding: 5px 10px;
+  }
+
+  // &__placeholder{
+  //   top: 60% !important;
+  // }
+
+  &__btn {
+    margin-left: 16px;
+  }
+
+  &__link {
+    margin-right: 16px;
+  }
+}
