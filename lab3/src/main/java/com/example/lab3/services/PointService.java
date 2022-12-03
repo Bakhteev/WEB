@@ -5,6 +5,7 @@ import com.example.lab3.dto.PointDto;
 import com.example.lab3.entity.PointEntity;
 import com.example.lab3.interfaces.TransactionCallable;
 import com.example.lab3.utils.TransactionManager;
+import jakarta.inject.Inject;
 import org.hibernate.Session;
 
 import java.util.LinkedList;
@@ -12,10 +13,10 @@ import java.util.List;
 
 public class PointService {
 
-    private PointDao pointDao;
+    private final PointDao pointDao;
 
-    public PointService() {
-        this.pointDao = new PointDao();
+    public PointService(PointDao pointDao) {
+        this.pointDao = pointDao;
     }
 
     public void addPoint(PointDto pointDto) {

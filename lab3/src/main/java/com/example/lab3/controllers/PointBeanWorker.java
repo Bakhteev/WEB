@@ -1,6 +1,7 @@
 package com.example.lab3.controllers;
 
 
+import com.example.lab3.dao.PointDao;
 import com.example.lab3.dto.PointDto;
 import com.example.lab3.services.PointService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -23,7 +24,7 @@ public class PointBeanWorker {
     private PointService pointService;
 
     public PointBeanWorker() {
-        this.pointService = new PointService();
+        this.pointService = new PointService(new PointDao());
     }
 
     public void addPoint() {

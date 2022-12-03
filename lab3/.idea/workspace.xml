@@ -9,7 +9,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="435dd841-92e3-4e67-89f2-a3cbdd543d01" name="Changes" comment="started authorization" />
+    <list default="true" id="435dd841-92e3-4e67-89f2-a3cbdd543d01" name="Changes" comment="fixed prev commit">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/lab3/Filters/AuthFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/lab3/controllers/SignUpController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/lab3/dao/UserDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/lab3/utils/CookieParser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/lab3/utils/PasswordHash.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/start.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lab3/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lab3/controllers/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lab3/controllers/PointBeanWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lab3/controllers/PointBeanWorker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lab3/dao/PointDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lab3/dao/PointDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lab3/entity/PointEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lab3/entity/PointEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lab3/entity/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lab3/entity/UserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lab3/interfaces/BaseDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lab3/interfaces/BaseDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lab3/services/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lab3/services/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lab3/services/JWTService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lab3/services/JWTService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lab3/services/PointService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lab3/services/PointService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lab3/utils/TransactionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lab3/utils/TransactionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/faces-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/faces-config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/start.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/start.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/start.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/start.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/start.xhtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/web/src/js/pages/auth/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/web/src/js/pages/auth/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/web/src/scss/pages/index/components/_graph.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/web/src/scss/pages/index/components/_graph.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/web/src/start.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/web/src/start.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/web/src/start.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/web/src/start.scss" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -52,21 +80,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/tonig/Desktop/Новая папка&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Problems&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.3402299&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;D:\\IntelliJ IDEA 2022.2.1\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/ITMO_Lerning/2_course/WEB/lab-2.1",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Problems",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.3402299",
+    "settings.editor.selected.configurable": "advanced.settings",
+    "ts.external.directory.path": "D:\\IntelliJ IDEA 2022.2.1\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\ITMO_Lerning\2_course\WEB\lab3\web" />
@@ -178,7 +206,9 @@
       <workItem from="1669127527695" duration="8777000" />
       <workItem from="1669228411943" duration="23506000" />
       <workItem from="1669308257678" duration="5075000" />
-      <workItem from="1669566221815" duration="8216000" />
+      <workItem from="1669566221815" duration="9152000" />
+      <workItem from="1670011218340" duration="2818000" />
+      <workItem from="1670090206804" duration="11257000" />
     </task>
     <task id="LOCAL-00001" summary="almost finished 3 lab">
       <created>1669258534709</created>
@@ -194,7 +224,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669574840810</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="fixed prev commit">
+      <created>1669575156415</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1669575156415</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -214,6 +251,33 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="almost finished 3 lab" />
     <MESSAGE value="started authorization" />
-    <option name="LAST_COMMIT_MESSAGE" value="started authorization" />
+    <MESSAGE value="fixed prev commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed prev commit" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/lab3/dao/UserDao.java</url>
+          <line>35</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/lab3/controllers/SignUpController.java</url>
+          <line>47</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/lab3/controllers/SignUpController.java</url>
+          <line>52</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/lab3/controllers/SignUpController.java</url>
+          <line>53</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

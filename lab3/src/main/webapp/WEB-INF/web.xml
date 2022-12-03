@@ -20,4 +20,31 @@
         <url-pattern>*.jsf</url-pattern>
         <url-pattern>/icefaces/*</url-pattern>
     </servlet-mapping>
+<!--    <servlet>-->
+<!--        <servlet-name>Login Controller</servlet-name>-->
+<!--        <servlet-class>com.example.lab3.controllers.LoginController</servlet-class>-->
+<!--        <load-on-startup>1</load-on-startup>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>Login Controller</servlet-name>-->
+<!--        <url-pattern>/login</url-pattern>-->
+<!--    </servlet-mapping>-->
+<!--    <servlet>-->
+<!--        <servlet-name>Sign up Controller</servlet-name>-->
+<!--        <servlet-class>com.example.lab3.controllers.LoginController</servlet-class>-->
+<!--        <load-on-startup>1</load-on-startup>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>Sign up Controller</servlet-name>-->
+<!--        <url-pattern>/signup</url-pattern>-->
+<!--    </servlet-mapping>-->
+<!--    <filter>-->
+<!--        <filter-name>Auth Filter</filter-name>-->
+<!--        <filter-class>com.example.lab3.Filters.AuthFilter</filter-class>-->
+<!--    </filter>-->
+
+<!--    <filter-mapping>-->
+<!--        <filter-name>Auth Filter</filter-name>-->
+<!--        <url-pattern>*.xhtml</url-pattern>-->
+<!--    </filter-mapping>-->
 </web-app>

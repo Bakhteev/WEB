@@ -1,9 +1,7 @@
 package com.example.lab3.controllers;
 
-
 import com.example.lab3.dao.UserDao;
 import com.example.lab3.dto.UserDto;
-import com.example.lab3.entity.UserEntity;
 import com.example.lab3.services.AuthService;
 import com.example.lab3.services.JWTService;
 import com.example.lab3.utils.PasswordHash;
@@ -19,41 +17,42 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/login")
-public class LoginController extends HttpServlet {
+@WebServlet("/signup")
+public class SignUpController extends HttpServlet {
+
     @Inject
-    private AuthService authService;
+    AuthService authService;
     @Inject
-    private JWTService jwtService;
+    JWTService jwtService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        req.setAttribute("title", "Log in");
-        req.setAttribute("formTo", "/login");
-        req.setAttribute("linkTo", "/signup");
-        req.setAttribute("linkText", "Sign up");
+        req.setAttribute("title", "Sign Up");
+        req.setAttribute("formTo", "/signup");
+        req.setAttribute("linkTo", "/login");
+        req.setAttribute("linkText", "log in");
 
         getServletContext().getRequestDispatcher("/start.jsp").forward(req, res);
     }
+
     @Override
-    public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         UserDto userDto = new Gson().fromJson(req.getReader(), UserDto.class);
         String email = userDto.getEmail();
         String password = userDto.getPassword();
         if (!ValidateCredentials.validateCredentials(email, password)) {
             res.setStatus(400);
-            res.getWriter().write("Credentials is incorrect");
+            res.getWriter().print("Credentials are incorrect");
             return;
         }
-        UserEntity user = authService.getUserByEmail(email);
-        if (user == null || !(user.getPasswordHash().equals(PasswordHash.generateHashedPassword(password)))) {
-            res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            res.getWriter().write("Wrong email or password");
-            res.sendRedirect("/signup");
-            getServletContext().getRequestDispatcher("/start.jsp").forward(req, res);
+        if (authService.getUserByEmail(email) != null) {
+            res.setStatus(400);
+            res.getWriter().write("This email has already registered");
             return;
         }
-        Cookie cookie = new Cookie("token", jwtService.createJwtToken(user));
+        UserDto user = new UserDto(email, PasswordHash.generateHashedPassword(password));
+        authService.addUser(user);
+        Cookie cookie = new Cookie("token", jwtService.createJwtToken(authService.getUserByEmail(email)));
         cookie.setMaxAge(1000 * 60 * 60 * 24);
         res.addCookie(cookie);
         res.sendRedirect("/");

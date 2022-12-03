@@ -8,6 +8,7 @@
 
 #graph {
   height: 20em;
+  max-width: max-content;
   .graph-shape {
     fill: $fill-color;
     fill-opacity: 85%;

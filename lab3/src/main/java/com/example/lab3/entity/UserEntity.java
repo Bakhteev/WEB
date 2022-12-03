@@ -1,17 +1,21 @@
 package com.example.lab3.entity;
 
+import com.example.lab3.dto.UserDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="users")
+@ToString
+@Table(name = "users")
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +30,12 @@ public class UserEntity {
     @Basic(optional = false)
     private String passwordHash;
 
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "user")
     private List<PointEntity> hits;
+
+    public UserEntity(UserDto userDto) {
+        this.email = userDto.getEmail();
+        this.passwordHash = userDto.getPassword();
+//        this.hits = new LinkedList<>();
+    }
 }

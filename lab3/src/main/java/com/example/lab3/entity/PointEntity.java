@@ -31,12 +31,8 @@ public class PointEntity {
     private long leadTime;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private UserEntity userEntity;
-
-    @ManyToOne
     @JoinColumn(name = "users_id", referencedColumnName = "id")
-    private UserEntity users;
+    private UserEntity user;
 
     public PointEntity(PointDto pointDto) {
         this.xValue = pointDto.getXValue();
