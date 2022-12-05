@@ -2,5 +2,5 @@
 
 # Если взял мою лабу, не забудь поставить ей лайк)
 <p align="center">
-  <img src="https://i.pinimg.com/564x/72/7b/d4/727bd4cff3d9dfeb880959f764b15f5b.jpg">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwtM2okPuOS9Rj_-FOwlQZsLrYkQ7r5bCCvA&usqp=CAU" height="500"/>
 </p>
