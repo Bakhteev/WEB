@@ -11,7 +11,7 @@ import lombok.ToString;
 @Entity
 @Getter
 @Setter
-@ToString
+//@ToString
 @NoArgsConstructor
 public class PointEntity {
     @Id
@@ -34,12 +34,13 @@ public class PointEntity {
     @JoinColumn(name = "users_id", referencedColumnName = "id")
     private UserEntity user;
 
-    public PointEntity(PointDto pointDto) {
+    public PointEntity(PointDto pointDto, UserEntity user) {
         this.xValue = pointDto.getXValue();
         this.yValue = pointDto.getYValue();
         this.rValue = pointDto.getRValue();
         this.hit = pointDto.getHit();
         this.date = pointDto.getDate();
         this.leadTime = pointDto.getLeadTime();
+        this.user = user;
     }
 }

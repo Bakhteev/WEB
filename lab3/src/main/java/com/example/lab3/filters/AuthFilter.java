@@ -1,9 +1,9 @@
-package com.example.lab3.Filters;
+package com.example.lab3.filters;
 
-import com.example.lab3.dao.UserDao;
 import com.example.lab3.entity.UserEntity;
 import com.example.lab3.services.AuthService;
 import com.example.lab3.services.JWTService;
+import com.example.lab3.state.UserState;
 import com.example.lab3.utils.CookieParser;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.inject.Inject;
@@ -27,12 +27,11 @@ public class AuthFilter extends HttpFilter {
     @Inject
     AuthService authService;
 
-
-
+    @Inject
+    UserState userState;
 
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
-        System.out.println("XUI");
         Cookie cookie = CookieParser.getCookie(req, "token");
         String token = cookie == null ? "" : cookie.getValue();
 
@@ -47,6 +46,7 @@ public class AuthFilter extends HttpFilter {
                 String email = (String) jwtService.getClaims(token).getBody().get("email");
                 UserEntity user = authService.getUserByEmail(email);
                 if (user != null) {
+                    userState.setUser(user);
                     chain.doFilter(req, res);
                     return;
                 }
@@ -54,7 +54,6 @@ public class AuthFilter extends HttpFilter {
         } catch (ExpiredJwtException e) {
             res.setStatus(301);
             res.sendRedirect("/login");
-            System.out.println(req.getRequestURI());
         }
         res.setStatus(301);
         res.sendRedirect("/login");

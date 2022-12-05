@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/start.css">
 </head>
 <body>
-<div style="position: absolute; top: 0; left: 0; z-index: 10">
+<div style="position: absolute; top: 20px; left: 20px; z-index: 10">
 
 <div class="clock">
     <div class="outer-clock-face">
@@ -21,6 +21,8 @@
     </div>
 </div>
 </div>
+
+
 
 <div class="row center-xs middle-xs auth my-container">
     <div class="col-xs-6 auth__wrapper">

@@ -40,9 +40,7 @@ public class PointBean implements Serializable {
     }
 
     public void setXValue(float xValue) {
-//        if(ValidateService.validateX(xValue)){
             this.xValue = (float) (Math.ceil(xValue * 10)/10);
-//        }
     }
 
     public void setYValue(float yValue) {

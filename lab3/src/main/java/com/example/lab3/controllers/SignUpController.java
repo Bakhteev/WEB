@@ -2,8 +2,10 @@ package com.example.lab3.controllers;
 
 import com.example.lab3.dao.UserDao;
 import com.example.lab3.dto.UserDto;
+import com.example.lab3.entity.UserEntity;
 import com.example.lab3.services.AuthService;
 import com.example.lab3.services.JWTService;
+import com.example.lab3.state.UserState;
 import com.example.lab3.utils.PasswordHash;
 import com.example.lab3.validators.ValidateCredentials;
 import com.google.gson.Gson;
@@ -24,6 +26,9 @@ public class SignUpController extends HttpServlet {
     AuthService authService;
     @Inject
     JWTService jwtService;
+
+    @Inject
+    UserState userState;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -52,9 +57,11 @@ public class SignUpController extends HttpServlet {
         }
         UserDto user = new UserDto(email, PasswordHash.generateHashedPassword(password));
         authService.addUser(user);
-        Cookie cookie = new Cookie("token", jwtService.createJwtToken(authService.getUserByEmail(email)));
+        UserEntity userEntity =  authService.getUserByEmail(email);
+        Cookie cookie = new Cookie("token", jwtService.createJwtToken(userEntity));
         cookie.setMaxAge(1000 * 60 * 60 * 24);
         res.addCookie(cookie);
+        userState.setUser(userEntity);
         res.sendRedirect("/");
     }
 }

@@ -20,8 +20,6 @@ public class XYValidator implements Validator<Float> {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "","Value must be from -5 to 5!");
             FacesContext.getCurrentInstance().addMessage(null, message);
             System.out.println("Exception");
-//            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Message Content."));
-//            throw new ValidatorException(message);
         }
     }
 }

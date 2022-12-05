@@ -13,7 +13,6 @@ public class HibernateSessionFactory {
         if (sessionFactory == null){
             Configuration configuration = new Configuration();
             configuration.addAnnotatedClass(UserEntity.class);
-//            configuration.setPhysicalNamingStrategy(new CamelCaseToUnderscoresNamingStrategy());
             configuration.configure();
             sessionFactory = configuration.buildSessionFactory();
         }

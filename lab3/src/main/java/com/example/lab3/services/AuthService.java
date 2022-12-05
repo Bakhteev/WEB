@@ -20,8 +20,9 @@ public class AuthService {
     private UserDao userDao;
 
 
+
     public UserEntity getUserByEmail(String email) {
-        List<UserEntity> data = TransactionManager.doInTransaction(session -> userDao.getBy(session, "email", email));
+        List<UserEntity> data = TransactionManager.doInTransaction(session -> userDao.getByEmail(session,  email));
         if(data.size() == 0){
             return null;
         }

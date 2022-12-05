@@ -17,24 +17,16 @@ import java.util.List;
 @ApplicationScoped
 @NoArgsConstructor
 @ToString
-public class UserDao implements BaseDao<UserEntity, UserDto>, Serializable {
+public class UserDao implements Serializable {
     private static final long serialVersionUID = -6680734166634363295L;
 
-    @Override
     public void create(UserDto userDto, Session session) {
         session.save(new UserEntity(userDto));
     }
 
-    @Override
-    public List<UserEntity> getAll(Session session) {
-        return null;
-    }
-
-    @Override
-    public <T> List<UserEntity> getBy(Session session, String field, T data) {
+    public List<UserEntity> getByEmail(Session session, String data) {
         Query<UserEntity> query = session.createQuery("from UserEntity user where user.email = :value ", UserEntity.class);
         query.setParameter("value", data);
-        System.out.println(query.getResultList());
         return query.getResultList();
     }
 

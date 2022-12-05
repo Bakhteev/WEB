@@ -12,7 +12,6 @@ public class TransactionManager {
         try (Session session = HibernateSessionFactory.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             result = callable.execute(session);
-            System.out.println(result);
             transaction.commit();
         } catch (RuntimeException exception) {
             if (transaction != null && transaction.isActive()) transaction.rollback();
