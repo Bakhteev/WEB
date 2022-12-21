@@ -1,0 +1,37 @@
+version: '3'
+services:
+  application:
+    image: application
+    ports:
+      - "9990:9990"
+      - "8000:8000"
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:14.3
+    environment:
+      POSTGRES_DB: "lab3"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "323694m"
+    ports:
+      - "5432:5432"
+#  nginx:
+#    image: "nginx:1.23"
+#    volumes:
+#      - "./nginx/default.conf:/etc/nginx/conf.d/default.conf"
+#    ports:
+#      - "80:80"
+#    depends_on:
+#      - application
+
+#  mongodb:
+#    image: mongo:5.0
+#    ports:
+#      - "27017:27017"
+#    environment:
+#      - AUTH=yes
+#      - MONGODB_ADMIN_USER=admin
+#      - MONGODB_ADMIN_PASS=password
+#      - MONGODB_APPLICATION_DATABASE=sample
+#      - MONGODB_APPLICATION_USER=aashrey
+#      - MONGODB_APPLICATION_PASS=admin123

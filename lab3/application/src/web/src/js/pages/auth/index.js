@@ -3,7 +3,7 @@ import {showPopUp} from '../../common/popup.js'
 
 const popUpCloseBtn = document.querySelector('.popup__close')
 
-const baseURL = 'http://localhost:8000'
+const baseURL = 'http://127.0.0.1:8000'
 export const init = () => {
 
 
@@ -17,12 +17,14 @@ export const init = () => {
         ;(async () => {
             const res = await fetch(baseURL + to, {
                 method: 'POST',
+                mode: "no-cors",
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8',
                 },
                 body: JSON.stringify({email, password}),
             })
             const data = await res.text()
+            console.log(data)
             if (!res.ok) {
                 showPopUp(true, data)
             } else {
