@@ -26,12 +26,4 @@ public class UserEntity {
     private String email;
     @NotBlank
     private String passwordHash;
-
-//    private List<PointEntity> hits;
-
-    public UserEntity(AuthDto authDto) {
-        this.email = authDto.getEmail();
-        this.passwordHash = authDto.getPassword();
-//        this.hits = new LinkedList<>();
-    }
 }

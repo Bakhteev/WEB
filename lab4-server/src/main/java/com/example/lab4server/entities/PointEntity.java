@@ -17,7 +17,6 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 @NoArgsConstructor
 @Document("points")
 public class PointEntity {
-
     @MongoId
     private String id;
     private double xValue;
@@ -27,18 +26,4 @@ public class PointEntity {
     private String date;
     private long leadTime;
     private String userId;
-
-//    @ManyToOne
-//    @JoinColumn(name = "users_id", referencedColumnName = "id")
-//    private UserEntity user;
-
-//    public PointEntity(PointDto pointDto, UserEntity user) {
-//        this.xValue = pointDto.getXValue();
-//        this.yValue = pointDto.getYValue();
-//        this.rValue = pointDto.getRValue();
-//        this.hit = pointDto.getHit();
-//        this.date = pointDto.getDate();
-//        this.leadTime = pointDto.getLeadTime();
-////        this.user = user;
-//    }
 }
