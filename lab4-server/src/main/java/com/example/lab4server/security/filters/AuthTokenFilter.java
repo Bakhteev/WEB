@@ -1,6 +1,7 @@
 package com.example.lab4server.security.filters;
 
 import com.example.lab4server.dto.UserDto;
+import com.example.lab4server.httpExcetions.UnauthorizedException;
 import com.example.lab4server.security.jwt.JwtUtils;
 import com.example.lab4server.services.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
@@ -47,6 +48,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             }
         } catch (Exception e) {
             logger.error("Cannot set user authentication: {}");
+            throw new UnauthorizedException();
         }
 
         filterChain.doFilter(request, response);
