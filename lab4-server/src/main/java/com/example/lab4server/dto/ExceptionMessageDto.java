@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class UserDto {
-   private String id;
-   private String email;
+public class ExceptionMessageDto {
+    private int statusCode;
+    private String message;
 }

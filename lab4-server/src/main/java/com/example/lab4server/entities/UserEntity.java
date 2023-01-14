@@ -1,15 +1,16 @@
 package com.example.lab4server.entities;
 
-import com.example.lab4server.dto.UserDto;
+import com.example.lab4server.dto.AuthDto;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.io.Serial;
-import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
@@ -19,16 +20,18 @@ import java.io.Serializable;
 public class UserEntity {
     @Id
     private String id;
-
+    @Indexed(unique = true)
+    @NotBlank
+    @Email
     private String email;
-
+    @NotBlank
     private String passwordHash;
 
 //    private List<PointEntity> hits;
 
-    public UserEntity(UserDto userDto) {
-        this.email = userDto.getEmail();
-        this.passwordHash = userDto.getPassword();
+    public UserEntity(AuthDto authDto) {
+        this.email = authDto.getEmail();
+        this.passwordHash = authDto.getPassword();
 //        this.hits = new LinkedList<>();
     }
 }

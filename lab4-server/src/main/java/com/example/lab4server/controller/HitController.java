@@ -35,9 +35,10 @@ public class HitController {
 
     @GetMapping
     public ResponseEntity<Map<String, Object>> getAll(@RequestParam(name="page", defaultValue = "1") int page,
-                                                    @RequestParam(name="limit", defaultValue = "10") int limit){
+                                                    @RequestParam(name="limit", defaultValue = "10") int limit,
+                                                      @RequestParam(name="userId", required = false) String userId){
         Pageable paging = PageRequest.of(page-1, limit);
-        Page<PointEntity> data  = pointRepository.findAll(paging);
+        Page<PointEntity> data  = pointRepository.findAllPointsByUserId(userId,paging);
         Map<String, Object> result = new LinkedHashMap<>();
         result.put("currentPage", data.getNumber()+1);
         result.put("totalPages",data.getTotalPages());
@@ -48,12 +49,15 @@ public class HitController {
 
 
     @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody CreatePointDto createPointDto){
+    public ResponseEntity<?> create(@RequestBody CreatePointDto createPointDto,
+                                    @RequestParam(name="userId", required = false) String userId){
         PointDto pointDto = DtoCreator.createDto(createPointDto);
         pointDto.setHit("hit");
         pointDto.setDate(new SimpleDateFormat("dd.MM.yyyy hh:mm").format(new Date()));
         pointDto.setLeadTime(System.nanoTime());
-        pointRepository.save(PointMapper.INSTANCE.toPointEntity(pointDto));
+        PointEntity point = PointMapper.INSTANCE.toPointEntity(pointDto);
+        point.setUserId(userId);
+        pointRepository.save(point);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
