@@ -21,3 +21,10 @@ logging:
     root: INFO
     org.springframework.web: DEBUG
     org.springframework.security: DEBUG
+bakhteev:
+  app:
+    jwtAccessSecret: accessTokenSecret
+#    jwtAccessExpirationMs: 3600000 # 1 hour
+#    jwtRefreshExpirationMs: 86400000 # 1 day
+    jwtAccessExpirationMs: 60000
+    jwtRefreshExpirationMs: 120000
