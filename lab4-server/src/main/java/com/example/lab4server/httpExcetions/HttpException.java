@@ -4,13 +4,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 @RequiredArgsConstructor
 public class HttpException extends RuntimeException {
-    HttpStatus statusCode;
+    protected HttpStatus statusCode;
 
     public HttpException(String message, HttpStatus statusCode){
         super(message);

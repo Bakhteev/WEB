@@ -1,7 +1,7 @@
 package com.example.lab4server.security.jwt;
 
 import com.example.lab4server.dto.UserDto;
-import com.example.lab4server.security.userDetails.UserDetailsImpl;
+import com.example.lab4server.entities.UserEntity;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +20,7 @@ public class JwtUtils {
     @Value("${bakhteev.app.jwtAccessExpirationMs}")
     private int jwtAccessExpirationMs;
 
-    public String generateJwtAccessToken(UserDetailsImpl userDetails) {
+    public String generateJwtAccessToken(UserEntity userDetails) {
         return generateJwtAccessFromUserDetails(userDetails);
     }
 
@@ -34,10 +34,10 @@ public class JwtUtils {
         return Jwts.parser().setSigningKey(jwtAccessSecret).parseClaimsJws(token).getBody().get(key);
     }
 
-    private String generateJwtAccessFromUserDetails(UserDetailsImpl userDetails) {
+    private String generateJwtAccessFromUserDetails(UserEntity user) {
         return Jwts.builder()
-                .claim("email", userDetails.getEmail())
-                .claim("id", userDetails.getId())
+                .claim("email", user.getEmail())
+                .claim("id", user.getId())
                 .signWith(SignatureAlgorithm.HS512, jwtAccessSecret)
                 .setExpiration(new Date(new Date().getTime() + jwtAccessExpirationMs))
                 .compact();

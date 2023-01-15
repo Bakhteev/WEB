@@ -19,6 +19,6 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
         log.error("Unauthorized error: {}", authException.getMessage());
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        response.getOutputStream().println("{ \"statusCode\": 401, \"message\": \" Unauthorized\" }");
+        response.getOutputStream().println("{ \"statusCode\": 401, \"message\": \""+authException.getMessage()+"\" }");
     }
 }

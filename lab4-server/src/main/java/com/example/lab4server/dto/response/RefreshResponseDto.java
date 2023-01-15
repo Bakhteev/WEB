@@ -1,11 +1,11 @@
-package com.example.lab4server.dto;
+package com.example.lab4server.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class RefreshAuthenticatedResponseDto {
+public class RefreshResponseDto {
     private String accessToken;
     private String refreshToken;
     private final String tokenType = "Bearer";

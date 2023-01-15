@@ -3,11 +3,15 @@ package com.example.lab4server.exceptionHandlers;
 import com.example.lab4server.dto.ExceptionMessageDto;
 import com.example.lab4server.httpExcetions.HttpException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,5 +38,17 @@ public class GlobalExceptionHandler {
         }
         log.error(errorMsg);
         return new ResponseEntity<>(new ExceptionMessageDto(e.getStatusCode().value(), errorMsg), e.getStatusCode());
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ExceptionMessageDto> catchIllegalArgumentException(IllegalArgumentException e) {
+        log.error(e.getMessage());
+        return new ResponseEntity<>(new ExceptionMessageDto(HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    protected ResponseEntity <Object> handleNoHandlerFoundException(NoHandlerFoundException ex) {
+        log.error(ex.getMessage());
+        return new ResponseEntity<>(new ExceptionMessageDto(HttpStatus.NOT_FOUND.value(), ex.getMessage()), HttpStatus.NOT_FOUND);
     }
 }

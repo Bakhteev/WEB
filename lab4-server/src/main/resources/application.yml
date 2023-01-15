@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: Web-4
   data:
     mongodb:
       host: localhost
@@ -12,6 +14,11 @@ spring:
   devtools:
     restart:
       enabled: true
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
 server:
   port: 5000
   servlet:
@@ -24,7 +31,10 @@ logging:
 bakhteev:
   app:
     jwtAccessSecret: accessTokenSecret
-#    jwtAccessExpirationMs: 3600000 # 1 hour
-#    jwtRefreshExpirationMs: 86400000 # 1 day
-    jwtAccessExpirationMs: 60000
-    jwtRefreshExpirationMs: 120000
+    jwtAccessExpirationMs: 3600000 # 1 hour
+    jwtRefreshExpirationMs: 86400000 # 1 day
+#    jwtAccessExpirationMs: 60000
+#    jwtRefreshExpirationMs: 120000
+#springdoc:
+#  api-docs:
+#    path: /api/docs

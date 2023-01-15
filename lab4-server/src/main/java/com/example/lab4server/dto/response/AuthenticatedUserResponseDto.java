@@ -1,5 +1,6 @@
-package com.example.lab4server.dto;
+package com.example.lab4server.dto.response;
 
+import com.example.lab4server.dto.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

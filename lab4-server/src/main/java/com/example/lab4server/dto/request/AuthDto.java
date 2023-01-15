@@ -1,4 +1,4 @@
-package com.example.lab4server.dto;
+package com.example.lab4server.dto.request;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;

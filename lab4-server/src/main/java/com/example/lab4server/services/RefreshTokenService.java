@@ -30,7 +30,21 @@ public class RefreshTokenService {
     }
 
     public RefreshTokenEntity findByToken(String token) {
-        return refreshTokenRepository.findByToken(token);
+        Optional<RefreshTokenEntity> refreshTokenEntityOptional = refreshTokenRepository.findByToken(token);
+        return refreshTokenEntityOptional.orElse(null);
+    }
+
+    public RefreshTokenEntity findByUserId(String userId) {
+        Optional<RefreshTokenEntity> refreshTokenEntityOptional = refreshTokenRepository.findByUserId(userId);
+        if (refreshTokenEntityOptional.isPresent()) {
+            RefreshTokenEntity refreshTokenEntity = refreshTokenEntityOptional.get();
+            try{
+                return this.verifyExpiration(refreshTokenEntity);
+            }catch (ForbiddenException e){
+                return null;
+            }
+        }
+        return null;
     }
 
     public RefreshTokenEntity createRefreshToken(String userId) {
