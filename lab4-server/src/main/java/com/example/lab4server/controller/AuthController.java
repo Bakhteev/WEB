@@ -7,6 +7,7 @@ import com.example.lab4server.dto.response.RefreshResponseDto;
 import com.example.lab4server.entities.RefreshTokenEntity;
 import com.example.lab4server.entities.UserEntity;
 import com.example.lab4server.httpExcetions.BadRequestException;
+import com.example.lab4server.httpExcetions.UnauthorizedException;
 import com.example.lab4server.mappers.UserMapper;
 import com.example.lab4server.security.jwt.JwtUtils;
 import com.example.lab4server.security.userDetails.UserDetailsImpl;
@@ -14,14 +15,19 @@ import com.example.lab4server.services.AuthService;
 import com.example.lab4server.services.RefreshTokenService;
 import com.example.lab4server.services.UserDetailsServiceImpl;
 import com.example.lab4server.services.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
+@Tag(name = "Authentication")
 @RequestMapping("/auth")
 public class AuthController {
 
@@ -44,6 +50,7 @@ public class AuthController {
         this.userDetailsServiceImpl = userDetailsServiceImpl;
     }
 
+    @Operation(summary = "Registration path")
     @PostMapping("/registration")
     public ResponseEntity<AuthenticatedUserResponseDto> registration(@Valid @RequestBody AuthDto registrationDto) {
         UserEntity user = this.authService.registration(registrationDto);
@@ -55,6 +62,7 @@ public class AuthController {
         );
     }
 
+    @Operation(summary = "Log in path")
     @PostMapping("/login")
     public ResponseEntity<AuthenticatedUserResponseDto> login(@Valid @RequestBody AuthDto loginDto) {
         UserEntity user = this.authService.login(loginDto);
@@ -63,17 +71,17 @@ public class AuthController {
         RefreshTokenEntity refreshTokenEntity = refreshTokenService.findByUserId(user.getId());
         String jwtRefreshToken;
         if (refreshTokenEntity != null) {
-            jwtRefreshToken = refreshTokenEntity.getToken();
-        } else {
-            jwtRefreshToken = refreshTokenService.createRefreshToken(user.getId()).getToken();
+            refreshTokenService.deleteByUserId(user.getId());
         }
+        jwtRefreshToken = refreshTokenService.createRefreshToken(user.getId()).getToken();
         return ResponseEntity.ok(
                 new AuthenticatedUserResponseDto(jwtAccessToken, jwtRefreshToken, UserMapper.INSTANCE.toDTO(user))
         );
     }
 
+    @Operation(summary = "Refresh authentication")
     @PostMapping("/refresh")
-    public ResponseEntity<?> refreshAuth(@Valid @RequestBody RefreshTokenRequestDto request) {
+    public ResponseEntity<RefreshResponseDto> refreshAuth(@Valid @RequestBody RefreshTokenRequestDto request) {
         String requestRefreshToken = request.getRefreshToken();
         RefreshTokenEntity refreshTokenEntity = refreshTokenService.findByToken(requestRefreshToken);
         if (refreshTokenEntity != null) {
@@ -85,14 +93,20 @@ public class AuthController {
                 return ResponseEntity.ok(new RefreshResponseDto(accessToken, requestRefreshToken));
             }
         }
-        throw new BadRequestException("Invalid refresh token");
+        throw new BadCredentialsException("Invalid refresh token");
     }
 
+    @Operation(security = {@SecurityRequirement(name = "bearer-key")}, summary = "Log out path")
     @PostMapping("/logout")
     public ResponseEntity<?> logoutUser() {
-        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String userId = userDetails.getId();
-        refreshTokenService.deleteByUserId(userId);
-        return ResponseEntity.ok("Log out successful!");
+        try {
+            UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            String userId = userDetails.getId();
+            refreshTokenService.deleteByUserId(userId);
+            return ResponseEntity.ok("Log out successful!");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new UnauthorizedException();
+        }
     }
 }

@@ -1,0 +1,14 @@
+.form__input input::-webkit-outer-spin-button,
+.form__input input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.form__input input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.form__input {
+  .Textinput-Label {
+    color: #000000;
+  }
+}

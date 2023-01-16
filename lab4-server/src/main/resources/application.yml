@@ -31,10 +31,10 @@ logging:
 bakhteev:
   app:
     jwtAccessSecret: accessTokenSecret
-    jwtAccessExpirationMs: 3600000 # 1 hour
-    jwtRefreshExpirationMs: 86400000 # 1 day
-#    jwtAccessExpirationMs: 60000
-#    jwtRefreshExpirationMs: 120000
+#    jwtAccessExpirationMs: 3600000 # 1 hour
+#    jwtRefreshExpirationMs: 86400000 # 1 day
+    jwtAccessExpirationMs: 10000
+    jwtRefreshExpirationMs: 120000
 #springdoc:
 #  api-docs:
 #    path: /api/docs

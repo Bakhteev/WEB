@@ -5,35 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8e9188c3-a656-4fe9-883f-275353eab05f" name="Changes" comment="added docker and nginx">
-      <change afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/dto/request/CreateHitDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/dto/response/HitsPageResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/mappers/HitMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/services/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab4-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/controller/AuthController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/controller/HitController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/controller/HitController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/controller/PingPongController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/controller/PingPongController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/dto/AuthDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/dto/request/AuthDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/dto/AuthenticatedUserResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/dto/response/AuthenticatedUserResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/dto/CreatePointDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/dto/PointDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/dto/response/HitResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/dto/RefreshAuthenticatedResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/dto/response/RefreshResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/dto/RefreshTokenDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/dto/request/RefreshTokenRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/entities/PointEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/entities/HitEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/entities/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/entities/UserEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/mappers/PointMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/repository/PointRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/repository/HitRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/repository/RefreshTokenRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/repository/RefreshTokenRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/repository/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/security/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/security/WebSecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/security/filters/AuthTokenFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/security/filters/AuthTokenFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/security/jwt/JwtUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/security/jwt/JwtUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/services/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/services/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/services/HitService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/services/HitService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/services/RefreshTokenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/services/RefreshTokenService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/services/UserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/services/UserDetailsServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/utils/DtoCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/utils/DtoCreator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4-server/src/test/java/com/example/lab4server/Lab4ServerApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/test/java/com/example/lab4server/Lab4ServerApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,21 +53,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/ITMO_Lerning/2_course/WEB/lab4-server&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/ITMO_Lerning/2_course/WEB/lab3",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\ITMO_Lerning\2_course\WEB\lab3\application" />
@@ -111,6 +90,8 @@
       <workItem from="1673474382259" duration="659000" />
       <workItem from="1673652436455" duration="3303000" />
       <workItem from="1673731267012" duration="1342000" />
+      <workItem from="1673803933068" duration="41000" />
+      <workItem from="1673812727258" duration="7502000" />
     </task>
     <task id="LOCAL-00001" summary="added docker and nginx">
       <created>1671667065446</created>
