@@ -39,8 +39,8 @@ export const getHits = async (page: number, limit: number, token: string) => {
   })
 }
 
-export const createHit = async (dto: CreateHitDto) => {
-  return await api.post<HitResponseDto>('/hits', {
+export const createHit = async (dto: CreateHitDto, token: string) => {
+  return await api.post<HitResponseDto>('/hits/create', dto, {
     headers: { Authorization: 'Bearer ' + token },
   })
 }

@@ -7,11 +7,9 @@ import { setPage, fetchData } from '@/redux/actions'
 
 const Main = () => {
   const { data } = useSelector(hitHistorySelector)
-  const [curData, setCurData] = useState([])
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(fetchData())
-    setCurData(data)
   }, [])
   return (
     <>
@@ -24,7 +22,7 @@ const Main = () => {
               <HitForm />
             </Col>
             <Col lg={6}>
-              <HistoryTable data={curData} />
+              <HistoryTable data={data} />
             </Col>
           </Row>
         </Container>

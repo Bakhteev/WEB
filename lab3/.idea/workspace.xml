@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8e9188c3-a656-4fe9-883f-275353eab05f" name="Changes" comment="added docker and nginx">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/controller/HitController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/controller/HitController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/controller/PingPongController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/controller/PingPongController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/security/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/security/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/security/filters/AuthTokenFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/java/com/example/lab4server/security/filters/AuthTokenFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab4-client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-client/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab4-client/src/api/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-client/src/api/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab4-client/src/components/header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-client/src/components/header/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab4-client/src/views/main/Main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-client/src/views/main/Main.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../lab4-server/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4-server/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

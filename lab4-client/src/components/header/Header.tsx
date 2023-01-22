@@ -4,9 +4,11 @@ import styles from './style.module.scss'
 import { Button } from '@yandex/ui/Button/desktop/bundle'
 import { useDispatch } from 'react-redux'
 import { authLogout } from '@/redux/actions'
+import { useNavigate } from 'react-router-dom'
 
 const Header = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   return (
     <header className={styles.header}>
       <Container className="bg-green ">
@@ -25,7 +27,10 @@ const Header = () => {
               id="logout"
               size="m"
               className="d-flex justify-content-center text"
-              onClick={() => dispatch(authLogout())}
+              onClick={() => {
+                dispatch(authLogout())
+                navigate('/auth/login')
+              }}
             >
               Log out
             </Button>

@@ -7,7 +7,7 @@ import { Paginator } from '@/components'
 
 const HistoryTable = ({ data = [] }) => {
   let { totalPages, currentPage } = useSelector(hitHistorySelector)
-
+  const dispatch = useDispatch()
   const handleClick = (page) => {
     dispatch(setPage(page < 1 ? currentPage : page))
   }

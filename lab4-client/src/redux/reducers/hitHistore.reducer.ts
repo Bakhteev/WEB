@@ -1,5 +1,5 @@
 import { HitResponseDto } from '@/models'
-import { SET_PAGE, SET_DATA } from '@/redux/actions/hitHistory/actionTypes'
+import { SET_PAGE, SET_DATA, ADD_HIT } from '@/redux/actions'
 import { Action } from 'redux'
 export interface IHitHistoryStore {
   currentPage: number
@@ -45,6 +45,8 @@ export const hitHistoryReducer = (
       return { ...state, currentPage: payload }
     case SET_DATA:
       return { ...state, data: [...state.data, ...payload.data] }
+    case ADD_HIT:
+      return { ...state, data: [...state.data, payload] }
     default:
       return state
   }

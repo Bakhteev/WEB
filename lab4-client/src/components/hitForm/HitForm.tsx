@@ -5,7 +5,7 @@ import { Radiobox, Radio } from '@yandex/ui/Radiobox/desktop/bundle'
 import { Button } from '@yandex/ui/Button/desktop/bundle'
 import { useSelector, useDispatch } from 'react-redux'
 import { graphSelector } from '@/redux/selectors'
-import { setR, setX, setY } from '@/redux/actions'
+import { setR, setX, setY, addHit, createHit } from '@/redux/actions'
 import './styles.scss'
 
 const rValues = [1, 2, 3, 4, 5]
@@ -17,6 +17,7 @@ const HitForm = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
+    dispatch(createHit({ x, y, r }))
   }
   return (
     <form onSubmit={handleSubmit}>
